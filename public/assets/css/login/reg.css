@@ -1,0 +1,30 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    padding: 30px 0;
+}
+
+.register-card {
+    width: 100%;
+    max-width: 661px;
+    border: none;
+    border-radius: 80px;
+}
+
+.form-control {
+    padding: 12px;
+}
+
+.btn-register {
+    background: #667eea;
+    color: white;
+    padding: 12px;
+}
+
+.btn-register:hover {
+    background: #5368d5;
+    color: white;
+}

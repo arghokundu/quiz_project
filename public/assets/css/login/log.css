@@ -1,0 +1,29 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    border: none;
+    border-radius: 80px;
+}
+
+.form-control {
+    padding: 12px;
+}
+
+.btn-login {
+    background: #667eea;
+    color: white;
+    padding: 12px;
+}
+
+.btn-login:hover {
+    background: #5368d5;
+    color: white;
+}
