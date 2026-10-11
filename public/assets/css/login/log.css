@@ -21,6 +21,7 @@ body {
     background: #667eea;
     color: white;
     padding: 12px;
+    border-radius: 80px;
 }
 
 .btn-login:hover {
