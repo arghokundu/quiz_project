@@ -23,12 +23,22 @@
                     Please login to your account
                 </p>
 
+                <div>
+                    @if(session('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ session('error') }}
+
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @endif
+                </div>
+
                 <form action="/loginEntry" id="loginForm" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label for="email" class="form-label">Email Address</label>
                         <input type="email" class="form-control" id="email" name="useremail"
-                            placeholder="Enter your email" >
+                            placeholder="Enter your email">
                     </div>
                     @error('useremail')
                     <div class="text-danger">{{$message}}</div>
@@ -36,7 +46,7 @@
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" name="userpassword"
-                            placeholder="Enter your password"  minlength="7">
+                            placeholder="Enter your password" minlength="7">
                     </div>
                     @error('userpassword')
                     <div class="text-danger">{{$message}}</div>

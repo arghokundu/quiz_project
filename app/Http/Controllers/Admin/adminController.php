@@ -15,7 +15,16 @@ class adminController extends Controller
     }
     public function loginAdmin(adminLoginRequest $adlogReq)
     {
-        
-        return redirect('/');
+        $checkUserExists=AdminModel::select('admin_id','name','emailId','password','role')
+            ->where('emailId','=', $adlogReq->useremail)->where('password','=', $adlogReq->userpassword)->first();
+
+        if($checkUserExists)
+        {
+            return redirect('/');
+        }
+        else
+        {
+            return redirect('/login')->with('error','Admin Does not exists');
+        }
     }
 }
