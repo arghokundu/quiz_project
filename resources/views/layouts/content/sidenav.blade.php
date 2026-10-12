@@ -1,6 +1,7 @@
     <!-- ==================================================================
          2. SIDEBAR NAVIGATION (#sideNavbar)
          ================================================================== -->
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <aside id="sideNavbar" aria-label="Main Navigation">
 
         <!-- Brand Logo Header -->
@@ -46,15 +47,20 @@
              ---------------------------------------------------------------- -->
             <div class="sidebar-heading">Management</div>
             <div class="sidebar-heading-divider"></div>
-
+            {{--@if(session()->has('adminId'))--}}
             <ul class="sidebar-nav">
                 <!-- Dropdown Menu: Employees & User Management -->
                 <li class="nav-item">
                     <a href="javascript:void(0);" class="nav-link-custom" data-sidebar-toggle="dropdown"
                         aria-expanded="false" id="navDropdownUsers">
-                        <div class="link-left {{request()->is('api/showAll/api/users') ? 'active' : '' }}">
-                            <span class="nav-icon"><i class="bi bi-people-fill"></i></span>
-                            <span class="nav-text">API Employees & Users</span>
+                        <div class="link-left {{request()->is('showAllCategory') ||
+                            request()->is('categoryAdd') ? 'active' : '' }}">
+                            <span class="nav-icon">
+                                <i class="fa-regular fa-rectangle-list"></i>
+                            </span>
+                            <span class="nav-text">
+                                Category
+                            </span>
                         </div>
                         <div class="link-right">
                             <i class="bi bi-chevron-right dropdown-chevron"></i>
@@ -62,13 +68,18 @@
                     </a>
 
                     <ul class="sidebar-submenu" style="display: none;">
-                        <li><a href="/api/showAll/api/users" class="submenu-link 
-                          {{request()->is('api/showAll/api/users') ? 'active' : '' }}"><i
-                                    class="bi bi-person-lines-fill"></i>Employee List</a></li>
+                        <li>
+                            <a href="/showAllCategory" class="submenu-link 
+                                {{request()->is('showAllCategory') || request()->is('categoryAdd') ? 'active' : '' }}">
+                                <i class="fa-solid fa-layer-group"></i>
+                                Category List
+                            </a>
+                        </li>
                     </ul>
 
                 </li>
             </ul>
+            {{--@endif--}}
 
         </div>
 
