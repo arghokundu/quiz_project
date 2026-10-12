@@ -20,11 +20,34 @@ class adminController extends Controller
 
         if($checkUserExists)
         {
-            return redirect('/');
+            // Store admin details in session
+            session([
+                'adminId' => $checkUserExists->admin_id,
+                'adminName' => $checkUserExists->name,
+                'adminEmail' => $checkUserExists->emailId,
+                'adminRole' => $checkUserExists->role,
+            ]);
+            return view('layouts.mainApp');
         }
         else
         {
             return redirect('/login')->with('error','Admin Does not exists');
         }
+    }
+    public function logoutAdmin(Request $adlogReq)
+    {
+        $adlogReq->session()->forget([
+            'adminId',
+            'adminName',
+            'adminEmail',
+            'adminRole'
+        ]);
+
+        $adlogReq->session()->invalidate();
+        $adlogReq->session()->regenerateToken();
+            
+        return redirect('/login')->header('Cache-Control','no-store, no-cache, must-revalidate, max-age=0, private')
+            ->header('Pragma', 'no-cache')
+            ->header('Expires', '0');
     }
 }

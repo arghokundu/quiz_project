@@ -107,7 +107,7 @@
             </div>
 
             <!-- Sign In & Sign Up Header Quick Actions -->
-            @guest
+            @if(!session()->has('adminId'))
             <div class="d-none d-sm-flex align-items-center gap-2 me-1">
                 <a href="/login"
                     class="btn btn-sm btn-outline-primary d-inline-flex align-items-center gap-1 px-2.5 py-1"
@@ -115,13 +115,13 @@
                     <i class="bi bi-box-arrow-in-right"></i>
                     <span>Log In</span>
                 </a>
-                <a href="/register" class="btn btn-sm btn-primary d-inline-flex align-items-center gap-1 px-2.5 py-1"
+                <a href="#" class="btn btn-sm btn-primary d-inline-flex align-items-center gap-1 px-2.5 py-1"
                     style="font-size: 0.825rem; font-weight: 500;">
                     <i class="bi bi-person-plus-fill"></i>
                     <span>Sign Up</span>
                 </a>
             </div>
-            @endguest
+            @endif
 
             <!-- User Profile Dropdown -->
             <div class="dropdown">
@@ -134,16 +134,16 @@
                         <span class="status-indicator status-online" title="Online"></span>
                     </div>
                     <div class="user-info">
-                        @auth
+                        @if(session()->has('adminId'))
                         <span class="user-name">
-                            {{ Auth::user()->name }}
+                            {{session('adminName','Guest')}}
+                        </span>
+                        <span class="user-name">
+                            {{session('adminRole','Guest')}}
                         </span>
                         @else
-                        <span class="user-name">
-                            Guest
-                        </span>
-                        @endauth
-                        <span class="user-role">Administrator</span>
+                        <span class="user-role">Guest</span>
+                        @endif
                     </div>
                     <i class="bi bi-chevron-down text-muted ms-1 d-none d-sm-inline" style="font-size: 0.75rem;"></i>
                 </button>
@@ -168,9 +168,13 @@
                         <hr class="dropdown-divider">
                     </li>
                     <li>
-                        <a class="dropdown-item text-danger" href="/logout">
-                            <i class="bi bi-box-arrow-right"></i> Sign Out
-                        </a>
+                        <form action="/logout" method="POST">
+                            @csrf
+                            <button type="submit" class="dropdown-item text-danger">
+                                <i class="bi bi-box-arrow-right"></i>
+                                Sign Out
+                            </button>
+                        </form>
                     </li>
                 </ul>
             </div>
