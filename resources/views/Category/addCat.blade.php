@@ -25,11 +25,12 @@
             </small>
         </div>
         <div class="card-body p-4 p-md-5">
-            <form action="#" id="categoryForm" method="POST">
+            <form action="/storecategory" id="categoryForm" method="POST">
                 @csrf
                 <div class="mb-4">
                     <label for="categoryName" class="form-label fw-semibold">
-                        Category Name <span class="text-danger">*</span>
+                        Category Name 
+                        <span class="text-danger">*</span>
                     </label>
                     <div class="input-group">
                         <span class="input-group-text bg-light">

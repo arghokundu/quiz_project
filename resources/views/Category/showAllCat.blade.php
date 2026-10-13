@@ -77,9 +77,10 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($categoryData as $cat)
                         <tr>
                             <td class="ps-4">
-                                <span class="text-muted fw-semibold">1</span>
+                                <span class="text-muted fw-semibold">{{$categoryData->firstItem() + $loop->index}}</span>
                             </td>
                             <td>
                                 <div class="d-flex align-items-center gap-3">
@@ -87,12 +88,12 @@
                                         d-flex align-items-center justify-content-center">
                                     </div>
                                     <div>
-                                        <div class="fw-semibold text-dark">Sample Category</div>
+                                        <div class="fw-semibold text-dark">{{$cat->category_name}}</div>
                                     </div>
                                 </div>
                             </td>
                             <td>
-                                <span class="text-secondary">Admin</span>
+                                <span class="text-secondary">{{$cat->creater}}</span>
                             </td>
                             <td>
                                 <div class="d-flex justify-content-center gap-2">
@@ -107,7 +108,7 @@
                                 </div>
                             </td>
                         </tr>
-                        {{-- Replace the sample row with your database loop --}}
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -119,6 +120,9 @@
                     <i class="fa-solid fa-circle-info me-1"></i>
                     Category records
                 </small>
+            </div>
+            <div>
+                {{$categoryData->links('pagination::bootstrap-5')}}
             </div>
         </div>
     </div>
