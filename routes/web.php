@@ -21,6 +21,8 @@ Route::middleware(['adminAuth'])->group(function()
     Route::get('/showAllCategory',[categoryController::class,'showAllCate']);
     Route::get('/categoryAdd',[categoryController::class,'addCat']);
     Route::post('/storecategory',[categoryController::class,'storeCat']);
+
+    Route::get('/viewcatagory/{id}',[categoryController::class,'viewCat']);
 });
 
 

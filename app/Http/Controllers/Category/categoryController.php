@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Category\CategoryModel;
 use App\Http\Requests\Category\catRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
 
 
 class categoryController extends Controller
@@ -50,5 +51,11 @@ class categoryController extends Controller
             DB::rollback();
             return back()->with('error',$e->getMessage());
         }
+    }
+    public function viewCat($catId)
+    {
+        $catId=Crypt::decrypt($catId);
+        $viewCate=CategoryModel::select('cat_id','category_name','creater')->findOrFail($catId);
+        return view('Category.viewCat',compact('viewCate'));
     }
 }
