@@ -23,6 +23,9 @@ Route::middleware(['adminAuth'])->group(function()
     Route::post('/storecategory',[categoryController::class,'storeCat']);
 
     Route::get('/viewcatagory/{id}',[categoryController::class,'viewCat']);
+
+    Route::get('/editCate/{id}',[categoryController::class,'editCategory']);
+    Route::post('/updateCate/{id}',[categoryController::class,'updateCategory']);
 });
 
 

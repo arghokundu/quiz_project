@@ -25,7 +25,7 @@
             </small>
         </div>
         <div class="card-body p-4 p-md-5">
-            <form action="#" id="categoryForm" method="POST">
+            <form action="/updateCate/{{Crypt::encrypt($editCategory->cat_id)}}" id="categoryForm" method="POST">
                 @csrf
                 <div class="mb-4">
                     <label for="categoryName" class="form-label fw-semibold">
@@ -36,7 +36,8 @@
                             <i class="fa-solid fa-tag text-secondary"></i>
                         </span>
                         <input type="text" class="form-control"
-                            id="categoryName" name="categoryName" placeholder="Enter category name" required>
+                            id="categoryName" name="categoryName" placeholder="Enter category name" 
+                            value="{{old('categoryName',$editCategory->category_name)}}" required>
                     </div>
                     @error('categoryName')
                     <div class="text-danger small mt-2">
@@ -44,6 +45,13 @@
                         {{ $message }}
                     </div>
                     @enderror
+                    <!-- Display message -->
+                    @if(session('error'))
+                    <p class="text-danger fw-semibold mt-2">
+                        <i class="fa-solid fa-circle-exclamation me-1"></i>
+                        {{ session('error') }}
+                    </p>
+                    @endif
                 </div>
                 <div class="d-flex flex-column flex-sm-row justify-content-end gap-2">
                     <a href="/showAllCategory" class="btn btn-light border px-4 py-2">

@@ -70,4 +70,48 @@ class categoryController extends Controller
         $viewCate=CategoryModel::select('cat_id','category_name','creater')->findOrFail($catId);
         return view('Category.viewCat',compact('viewCate'));
     }
+    public function editCategory($categoryId)
+    {
+        $categoryId=Crypt::decrypt($categoryId);
+        $editCategory=CategoryModel::select('cat_id','category_name','creater')->findOrFail($categoryId);
+        return view('Category.editCat',compact('editCategory'));
+    }
+    public function updateCategory(catRequest $catr,$catId)
+    {
+        DB::beginTransaction();
+        try
+        {
+            $catId=Crypt::decrypt($catId);
+            $updateCat=CategoryModel::select('cat_id','category_name','creater')->findOrFail($catId);
+            // ------check category exists or not -----
+            $categoryName=strtoUpper($catr->categoryName);
+            $checkCategoryName=CategoryModel::select('cat_id','category_name','creater','updated_at')
+                ->where('category_name','=', $categoryName)->exists();
+            if($checkCategoryName)
+            {
+                DB::rollback();
+                return back()->with('error','Category name already exists');
+            }
+            // ----if not exists then save the category-----
+            $updateCat->category_name=$categoryName;
+            $updateCat->creater=session('adminName');
+            $updateCat->updated_at=now();
+            $saveCategory=$updateCat->save();
+            if($saveCategory)
+            {
+                DB::commit();
+                return redirect('/showAllCategory');
+            }
+            else
+            {
+                DB::rollback();
+                return back()->with('error','something went wrong');
+            }
+        }
+        catch(\Exception $e)
+        {
+            DB::rollback();
+            return back()->with('error',$e->getMessage());
+        }
+    }
 }

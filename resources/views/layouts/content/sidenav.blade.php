@@ -6,11 +6,11 @@
 
         <!-- Brand Logo Header -->
         <div class="sidebar-header">
-            <a href="index.html" class="brand-logo" id="brandLogo">
+            <a href="/" class="brand-logo" id="brandLogo">
                 <div class="brand-icon">
                     <i class="bi bi-layers-half"></i>
                 </div>
-                <span class="brand-text">Practice<span>Myself</span></span>
+                <span class="brand-text">Quiz<span>System</span></span>
             </a>
             <button type="button" class="btn-sidebar-toggle d-lg-none" aria-label="Close sidebar">
                 <i class="bi bi-x-lg"></i>
@@ -54,7 +54,7 @@
                     <a href="javascript:void(0);" class="nav-link-custom" data-sidebar-toggle="dropdown"
                         aria-expanded="false" id="navDropdownUsers">
                         <div class="link-left {{request()->is('showAllCategory') ||
-                            request()->is('categoryAdd') ? 'active' : '' }}">
+                            request()->is('categoryAdd') || request()->is('editCate/*') ? 'active' : '' }}">
                             <span class="nav-icon">
                                 <i class="fa-regular fa-rectangle-list"></i>
                             </span>
@@ -70,7 +70,8 @@
                     <ul class="sidebar-submenu" style="display: none;">
                         <li>
                             <a href="/showAllCategory" class="submenu-link 
-                                {{request()->is('showAllCategory') || request()->is('categoryAdd') ? 'active' : '' }}">
+                                {{request()->is('showAllCategory') || request()->is('categoryAdd')
+                                    || request()->is('editCate/*') ? 'active' : '' }}">
                                 <i class="fa-solid fa-layer-group"></i>
                                 Category List
                             </a>

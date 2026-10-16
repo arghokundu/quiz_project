@@ -97,11 +97,13 @@
                             </td>
                             <td>
                                 <div class="d-flex justify-content-center gap-2">
-                                    <a href="#" class="btn btn-sm btn-outline-warning rounded-2" title="Edit Category">
+                                    <a href="/editCate/{{Crypt::encrypt($cat->cat_id)}}" 
+                                        class="btn btn-sm btn-outline-warning rounded-2" title="Edit Category">
                                         <i class="fa-solid fa-pen-to-square me-1"></i>
                                         Edit
                                     </a>
-                                    <a href="/viewcatagory/{{Crypt::encrypt($cat->cat_id)}}" class="btn btn-sm btn-outline-info rounded-2" title="View Category">
+                                    <a href="/viewcatagory/{{Crypt::encrypt($cat->cat_id)}}" 
+                                        class="btn btn-sm btn-outline-info rounded-2" title="View Category">
                                         <i class="fa-solid fa-eye me-1"></i>
                                         View
                                     </a>
