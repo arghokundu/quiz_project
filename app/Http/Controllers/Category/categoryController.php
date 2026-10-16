@@ -32,8 +32,20 @@ class categoryController extends Controller
         try
         {
             $cat=new CategoryModel();
-            $cat->category_name=strtoUpper($catr->categoryName);
+            $categoryName=strtoUpper($catr->categoryName);
+            // ------check category exists or not -----
+            $checkCategoryName=CategoryModel::select('cat_id','category_name','creater','created_at')
+                ->where('category_name','=', $categoryName)->exists();
+
+            if($checkCategoryName)
+            {
+                DB::rollback();
+                return back()->with('error','Category name already exists');
+            }
+            // ----if not exists then save the category-----
+            $cat->category_name=$categoryName;
             $cat->creater=session('adminName');
+            $cat->created_at=now();
             $saveCategory=$cat->save();
             if($saveCategory)
             {
