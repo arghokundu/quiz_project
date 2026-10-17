@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\adminController;
 use App\Http\Middleware\Admin\adminLogOrNot;
 use App\Http\Controllers\Category\categoryController;
+use App\Http\Controllers\Quiz\quizController;
 
 Route::get('/', function () {
     return view('layouts.mainApp');
@@ -26,6 +27,11 @@ Route::middleware(['adminAuth'])->group(function()
 
     Route::get('/editCate/{id}',[categoryController::class,'editCategory']);
     Route::post('/updateCate/{id}',[categoryController::class,'updateCategory']);
+
+    // ====================Quiz===============
+    Route::get('/showAllQuiz',[quizController::class,'quizAllShow']);
+    Route::get('/add/Quiz',[quizController::class,'quizAdd']);
+    Route::get('/edit/quiz',[quizController::class,'quizEdit']);
 });
 
 

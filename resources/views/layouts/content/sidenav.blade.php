@@ -1,7 +1,7 @@
     <!-- ==================================================================
          2. SIDEBAR NAVIGATION (#sideNavbar)
          ================================================================== -->
-         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <aside id="sideNavbar" aria-label="Main Navigation">
 
         <!-- Brand Logo Header -->
@@ -81,7 +81,40 @@
                 </li>
             </ul>
             {{--@endif--}}
+            
+            <ul class="sidebar-nav">
+                <!-- Dropdown Menu: Employees & User Management -->
+                <li class="nav-item">
+                    <a href="javascript:void(0);" class="nav-link-custom" data-sidebar-toggle="dropdown"
+                        aria-expanded="false" id="navDropdownUsers">
+                        <div class="link-left {{request()->is('') ||
+                            request()->is('') || request()->is('') ? 'active' : '' }}">
+                            <span class="nav-icon">
+                                <i class="fa-regular fa-rectangle-list"></i>
+                            </span>
+                            <span class="nav-text">
+                                Quizs
+                            </span>
+                        </div>
+                        <div class="link-right">
+                            <i class="bi bi-chevron-right dropdown-chevron"></i>
+                        </div>
+                    </a>
+
+                    <ul class="sidebar-submenu" style="display: none;">
+                        <li>
+                            <a href="/showAllQuiz" class="submenu-link 
+                                {{request()->is('') || request()->is('')
+                                    || request()->is('') ? 'active' : '' }}">
+                                <i class="fa-solid fa-layer-group"></i>
+                                Quiz Name List
+                            </a>
+                        </li>
+                    </ul>
+
+                </li>
+            </ul>
+
 
         </div>
-
     </aside>
