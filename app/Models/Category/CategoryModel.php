@@ -4,6 +4,7 @@ namespace App\Models\Category;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Quiz\QuizModel;
 
 class CategoryModel extends Model
 {
@@ -14,4 +15,9 @@ class CategoryModel extends Model
     public $keyType='int';
     public $incrementing='true';
     public $timesstamps='false';
+
+    public function quiz()
+    {
+        return $this->hasMany(QuizModel::class,'cat_id_fk','cat_id');
+    }
 }

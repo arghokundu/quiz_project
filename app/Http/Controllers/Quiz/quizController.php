@@ -12,9 +12,15 @@ use  App\Models\Quiz\QuizModel;
 
 class quizController extends Controller
 {
-    public function quizAllShow()
+    public function quizAllShow(Request $r)
     {
-        return view('Quiz.allQuiz');
+        $quizData=QuizModel::with('category')->select('quiz_id','Quiz_Name','cat_id_fk');
+        if($r->filled('searchQuiz'))
+        {
+            $quizData->where('Quiz_Name','ilike','%'.$r->searchQuiz.'%');
+        }
+        $quizData=$quizData->paginate(5)->withQueryString();
+        return view('Quiz.allQuiz',compact('quizData'));
     }
     public function quizAdd()
     {

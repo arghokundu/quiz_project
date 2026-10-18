@@ -30,14 +30,14 @@
         </div>
         <!-- {{-- Search Section --}} -->
         <div class="px-4 py-3 border-top border-bottom bg-light">
-            <form action="#" method="GET">
+            <form action="/showAllQuiz" method="GET">
                 <div class="row g-2 align-items-center">
                     <div class="col-12 col-md-6 col-lg-4">
                         <div class="input-group">
                             <span class="input-group-text bg-white border-end-0">
                                 <i class="fa-solid fa-magnifying-glass text-muted"></i>
                             </span>
-                            <input type="text" name="searchCat" id="searchCat" placeholder="Search quiz name..."
+                            <input type="text" name="searchQuiz" id="searchQuiz" placeholder="Search quiz name..."
                                 class="form-control border-start-0 ps-0">
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                         </button>
                     </div>
                     <div class="col-auto">
-                        <a href="/showAllCategory" class="btn btn-outline-secondary px-4">
+                        <a href="/showAllQuiz" class="btn btn-outline-secondary px-4">
                             <i class="fa-solid fa-rotate-left me-1"></i>
                             Reset
                         </a>
@@ -77,10 +77,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{--@foreach($categoryData as $cat)--}}
+                        @foreach($quizData as $quizD)
                         <tr>
                             <td class="ps-4">
-                                <span class="text-muted fw-semibold">{{--{{$categoryData->firstItem() + $loop->index}}--}}1</span>
+                                <span class="text-muted fw-semibold">{{$quizData->firstItem() + $loop->index}}</span>
                             </td>
                             <td>
                                 <div class="d-flex align-items-center gap-3">
@@ -88,12 +88,12 @@
                                         d-flex align-items-center justify-content-center">
                                     </div>
                                     <div>
-                                        <div class="fw-semibold text-dark">#</div>
+                                        <div class="fw-semibold text-dark">{{$quizD->category->category_name}}</div>
                                     </div>
                                 </div>
                             </td>
                             <td>
-                                <span class="text-secondary">#</span>
+                                <span class="text-secondary">{{$quizD->Quiz_Name}}</span>
                             </td>
                             <td>
                                 <div class="d-flex justify-content-center gap-2">
@@ -110,7 +110,7 @@
                                 </div>
                             </td>
                         </tr>
-                        {{--@endforeach--}}
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -124,7 +124,7 @@
                 </small>
             </div>
             <div>
-                {{--{{$categoryData->links('pagination::bootstrap-5')}}--}}
+                {{$quizData->links('pagination::bootstrap-5')}}
             </div>
         </div>
     </div>
