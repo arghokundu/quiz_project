@@ -12,7 +12,7 @@ class quizRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +23,18 @@ class quizRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'categoryName'=>'required | numeric',
+            'quizName'=>'required|min:2|max:30|regex:/^[A-Za-z0-9 ]+$/|unique:quizs,Quiz_Name',
+        ];
+    }
+    public function messages(): array
+    {
+        return [
+            'categoryName.required'=>'Category name is required',
+            'quizName.required'=>'QuizName name is required',
+            'quizName.min'=>'QuizName name minimum 2 character required',
+            'quizName.max'=>'QuizName name maximum 30 character',
+            'quizName.regex'=>'QuizName name not allow special character',
         ];
     }
 }

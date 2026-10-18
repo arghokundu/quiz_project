@@ -25,7 +25,7 @@
             </small>
         </div>
         <div class="card-body p-4 p-md-5">
-            <form action="#" id="quizForm" method="POST">
+            <form action="/store/quiz" id="quizForm" method="POST">
                 @csrf
                 <div class="mb-4">
                     <label for="categoryName" class="form-label fw-semibold">
@@ -37,9 +37,12 @@
                             <i class="fa-solid fa-tag text-secondary"></i>
                         </span>
                         <select class="form-select" id="categoryName" name="categoryName" required>
-                            <option value="">-- Select Category --</option>
-                            <option value="">
+                            <option value=""> Select Category </option>
+                            @foreach($categoryDetails as $catDtl)
+                            <option value="{{$catDtl->cat_id}}">
+                                {{$catDtl->category_name}}
                             </option>
+                            @endforeach
                         </select>
                     </div>
                     @error('categoryName')
@@ -48,12 +51,6 @@
                         {{ $message }}
                     </div>
                     @enderror
-                    @if(session('error'))
-                    <p class="text-danger fw-semibold mt-2">
-                        <i class="fa-solid fa-circle-exclamation me-1"></i>
-                        {{ session('error') }}
-                    </p>
-                    @endif
                 </div>
 
                 <div class="mb-4">
@@ -68,7 +65,7 @@
                         <input type="text" class="form-control" id="quizName" name="quizName"
                             placeholder="Enter quiz name" required>
                     </div>
-                    @error('categoryName')
+                    @error('quizName')
                     <div class="text-danger small mt-2">
                         <i class="fa-solid fa-circle-exclamation me-1"></i>
                         {{ $message }}

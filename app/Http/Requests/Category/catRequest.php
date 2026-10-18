@@ -23,7 +23,7 @@ class catRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'categoryName'=>'required|min:2|max:30|regex:/^[A-Za-z0-9]+$/|unique:category,category_name',
+            'categoryName'=>'required|min:2|max:30|regex:/^[A-Za-z0-9 ]+$/|unique:category,category_name',
         ];
     }
     public function messages(): array
