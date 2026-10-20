@@ -32,7 +32,9 @@ Route::middleware(['adminAuth'])->group(function()
     Route::get('/showAllQuiz',[quizController::class,'quizAllShow']);
     Route::get('/add/Quiz',[quizController::class,'quizAdd']);
     Route::post('/store/quiz',[quizController::class,'storeQuiz']);
-    Route::get('/edit/quiz',[quizController::class,'quizEdit']);
+    Route::get('/edit/quiz/{quizid}',[quizController::class,'quizEdit']);
+    Route::get('/viewspecific/quiz/{quizid}',[quizController::class,'specificViewQuiz']);
+    
 });
 
 

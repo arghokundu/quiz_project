@@ -87,7 +87,7 @@
                 <li class="nav-item">
                     <a href="javascript:void(0);" class="nav-link-custom" data-sidebar-toggle="dropdown"
                         aria-expanded="false" id="navDropdownUsers">
-                        <div class="link-left {{request()->is('') ||
+                        <div class="link-left {{request()->is('showAllQuiz') ||
                             request()->is('') || request()->is('') ? 'active' : '' }}">
                             <span class="nav-icon">
                                 <i class="fa-regular fa-rectangle-list"></i>
@@ -104,7 +104,7 @@
                     <ul class="sidebar-submenu" style="display: none;">
                         <li>
                             <a href="/showAllQuiz" class="submenu-link 
-                                {{request()->is('') || request()->is('')
+                                {{request()->is('showAllQuiz') || request()->is('')
                                     || request()->is('') ? 'active' : '' }}">
                                 <i class="fa-solid fa-layer-group"></i>
                                 Quiz Name List

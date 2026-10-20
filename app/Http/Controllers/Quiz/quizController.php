@@ -61,8 +61,16 @@ class quizController extends Controller
             return back()->with('error',$e->getMessage());
         }
     }
-    public function quizEdit()
+    public function quizEdit($quizId)
     {
-        return view('Quiz.editQuiz');
+        $QuizEditDtl=QuizModel::with('category')->select('quiz_id','Quiz_Name','cat_id_fk')->findOrFail($quizId);
+        $categoryDetails=CategoryModel::select('cat_id','category_name')->get();
+        return view('Quiz.editQuiz',compact('QuizEditDtl','categoryDetails'));
+    }
+    public function specificViewQuiz($quizId)
+    {
+        $quizId=Crypt::decrypt($quizId);
+        $QuizEditDtl=QuizModel::with('category')->select('quiz_id','Quiz_Name','cat_id_fk')->findOrFail($quizId);
+        return view('Quiz.viewQuiz',compact('QuizEditDtl'));    
     }
 }
