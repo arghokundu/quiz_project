@@ -25,7 +25,7 @@
             </small>
         </div>
         <div class="card-body p-4 p-md-5">
-            <form action="/update/quiz/{{$QuizEditDtl->quiz_id}}" id="editquizForm" method="POST">
+            <form action="/update/quiz/{{Crypt::encrypt($QuizEditDtl->quiz_id)}}" id="editquizForm" method="POST">
                 @csrf
                 <div class="mb-4">
                     <label for="categoryName" class="form-label fw-semibold">

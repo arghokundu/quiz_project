@@ -97,7 +97,7 @@
                             </td>
                             <td>
                                 <div class="d-flex justify-content-center gap-2">
-                                    <a href="/edit/quiz/{{$quizD->quiz_id}}" 
+                                    <a href="/edit/quiz/{{Crypt::encrypt($quizD->quiz_id)}}" 
                                         class="btn btn-sm btn-outline-warning rounded-2" title="Edit Category">
                                         <i class="fa-solid fa-pen-to-square me-1"></i>
                                         Edit

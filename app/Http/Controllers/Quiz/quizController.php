@@ -63,12 +63,14 @@ class quizController extends Controller
     }
     public function quizEdit($quizId)
     {
+        $quizId=Crypt::decrypt($quizId);
         $QuizEditDtl=QuizModel::with('category')->select('quiz_id','Quiz_Name','cat_id_fk')->findOrFail($quizId);
         $categoryDetails=CategoryModel::select('cat_id','category_name')->get();
         return view('Quiz.editQuiz',compact('QuizEditDtl','categoryDetails'));
     }
     public function quizUpdate(quizRequest $quizReq,$quizId)
     {
+        $quizId=Crypt::decrypt($quizId);
         $QuizUpdateDtl=QuizModel::with('category')->select('quiz_id','Quiz_Name','cat_id_fk')->findOrFail($quizId);
         DB::beginTransaction();
         try
