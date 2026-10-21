@@ -67,6 +67,42 @@ class quizController extends Controller
         $categoryDetails=CategoryModel::select('cat_id','category_name')->get();
         return view('Quiz.editQuiz',compact('QuizEditDtl','categoryDetails'));
     }
+    public function quizUpdate(quizRequest $quizReq,$quizId)
+    {
+        $QuizUpdateDtl=QuizModel::with('category')->select('quiz_id','Quiz_Name','cat_id_fk')->findOrFail($quizId);
+        DB::beginTransaction();
+        try
+        {
+            $reqQuizname=strtoupper($quizReq->quizName);
+            $checkQuizName=QuizModel::select('quiz_id','Quiz_Name','cat_id_fk')
+                ->where('Quiz_Name','=', $reqQuizname)
+                ->where('quiz_id','!=',$quizId)
+                ->exists();
+            if($checkQuizName)
+            {
+                DB::rollback();
+                return back()->withInput()->with('error','Quiz Name Already Exists');
+            }
+            $QuizUpdateDtl->Quiz_Name=$reqQuizname;
+            $QuizUpdateDtl->cat_id_fk=$quizReq->categoryName;
+            $savedQuizData=$QuizUpdateDtl->save();
+            if($savedQuizData)
+            {
+                DB::commit();
+                return redirect('/showAllQuiz');
+            }
+            else
+            {
+                DB::rollback();
+                return back()->with('error','something went wrong please check it..');
+            }
+        }
+        catch(\Exception $e)
+        {
+            DB::rollback();
+            return back()->with('error',$e->getMessage());
+        }
+    }
     public function specificViewQuiz($quizId)
     {
         $quizId=Crypt::decrypt($quizId);

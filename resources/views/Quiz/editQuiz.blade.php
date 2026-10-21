@@ -25,7 +25,7 @@
             </small>
         </div>
         <div class="card-body p-4 p-md-5">
-            <form action="#" id="editquizForm" method="POST">
+            <form action="/update/quiz/{{$QuizEditDtl->quiz_id}}" id="editquizForm" method="POST">
                 @csrf
                 <div class="mb-4">
                     <label for="categoryName" class="form-label fw-semibold">
@@ -67,7 +67,7 @@
                             placeholder="Enter quiz name" 
                             value="{{old('quizName',$QuizEditDtl->Quiz_Name)}}" required>
                     </div>
-                    @error('categoryName')
+                    @error('quizName')
                     <div class="text-danger small mt-2">
                         <i class="fa-solid fa-circle-exclamation me-1"></i>
                         {{ $message }}

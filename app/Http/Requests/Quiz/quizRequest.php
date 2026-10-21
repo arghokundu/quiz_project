@@ -4,6 +4,7 @@ namespace App\Http\Requests\Quiz;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class quizRequest extends FormRequest
 {
@@ -22,9 +23,17 @@ class quizRequest extends FormRequest
      */
     public function rules(): array
     {
+        $quizId = $this->route('quizId');
+
         return [
             'categoryName'=>'required | numeric',
-            'quizName'=>'required|min:2|max:30|regex:/^[A-Za-z0-9 ]+$/|unique:quizs,Quiz_Name',
+            'quizName' => [
+                'required',
+                'min:2',
+                'max:30',
+                'regex:/^[A-Za-z0-9 ]+$/',
+                Rule::unique('quizs', 'Quiz_Name')->ignore($quizId, 'quiz_id'),
+            ],
         ];
     }
     public function messages(): array
@@ -35,6 +44,7 @@ class quizRequest extends FormRequest
             'quizName.min'=>'QuizName name minimum 2 character required',
             'quizName.max'=>'QuizName name maximum 30 character',
             'quizName.regex'=>'QuizName name not allow special character',
+            'quizName.unique'=>'Quiz Name Already Exists',
         ];
     }
 }

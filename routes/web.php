@@ -33,6 +33,7 @@ Route::middleware(['adminAuth'])->group(function()
     Route::get('/add/Quiz',[quizController::class,'quizAdd']);
     Route::post('/store/quiz',[quizController::class,'storeQuiz']);
     Route::get('/edit/quiz/{quizid}',[quizController::class,'quizEdit']);
+    Route::post('/update/quiz/{id}',[quizController::class,'quizUpdate']);
     Route::get('/viewspecific/quiz/{quizid}',[quizController::class,'specificViewQuiz']);
     
 });
