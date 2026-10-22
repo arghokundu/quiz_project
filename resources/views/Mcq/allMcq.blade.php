@@ -10,7 +10,7 @@
             </h3>
         </div>
         <div class="d-flex flex-wrap gap-2 mt-3 mt-md-0">
-            <a href="/mcq/add" class="btn btn-primary rounded-3 px-4">
+            <a href="/mcq/add/{{$quizData->quiz_id}}" class="btn btn-primary rounded-3 px-4">
                 <i class="fa-solid fa-plus me-2"></i>
                 Add New Mcq
             </a>

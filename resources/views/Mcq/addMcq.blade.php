@@ -31,7 +31,7 @@
                 {{ session('error') }}
             </div>
             @endif
-            <form action="#" id="addMcqForm" method="POST">
+            <form action="/mcq/store" id="addMcqForm" method="POST">
                 @csrf
                 <div class="row g-4 mb-4">
                     <div class="col-12 col-md-6">
@@ -44,9 +44,9 @@
                             </span>
                             <select class="form-select" id="categoryName" name="categoryName" required>
                                 <option value="">Select Category</option>
-
-                                <option value="">Category Name</option>
-
+                                <option value="{{$categoryDtl->cat_id}}">
+                                    {{$categoryDtl->category_name}}
+                                </option>
                             </select>
                         </div>
                         @error('categoryName')
@@ -64,9 +64,10 @@
                                 <i class="fa-solid fa-book text-secondary"></i>
                             </span>
                             <select class="form-select" id="quizName" name="quizName" required >
-
                                 <option value="">Select Quiz</option>
-
+                                <option value="{{$quizDtl->quiz_id}}">
+                                    {{$quizDtl->Quiz_Name}}
+                                </option>
                             </select>
                         </div>
                         @error('quizName')

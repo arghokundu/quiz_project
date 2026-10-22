@@ -9,6 +9,7 @@ use  App\Models\Quiz\QuizModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\Mcq\McqModel;
+use App\Http\Requests\Mcq\mcqRequest;
 
 class mcqController extends Controller
 {
@@ -38,9 +39,15 @@ class mcqController extends Controller
         $allMcqData=$allMcqData->paginate(5)->withQueryString();
         return view('Mcq.allMcq',compact('allMcqData','quizData'));
     }
-    public function mcqAddForm()
+    public function mcqAddForm($quizId)
     {
-        return view('Mcq.addMcq');
+        $quizDtl=QuizModel::select('quiz_id','Quiz_Name','cat_id_fk')->where('quiz_id','=',$quizId)->firstOrFail();
+        $categoryDtl=CategoryModel::select('cat_id','category_name')->where('cat_id','=',$quizDtl->cat_id_fk)->firstOrFail();
+        return view('Mcq.addMcq',compact('categoryDtl','quizDtl'));
+    }
+    public function storeMcqQuestions(mcqRequest $req)
+    {
+        return view('Mcq.allMcq');
     }
     public function mcqEditForm()
     {
