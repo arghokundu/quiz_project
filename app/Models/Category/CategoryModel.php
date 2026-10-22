@@ -5,6 +5,7 @@ namespace App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Quiz\QuizModel;
+use App\Models\Mcq\McqModel;
 
 class CategoryModel extends Model
 {
@@ -19,5 +20,10 @@ class CategoryModel extends Model
     public function quiz()
     {
         return $this->hasMany(QuizModel::class,'cat_id_fk','cat_id');
+    }
+
+    public function mcq()
+    {
+        return $this->hasMany(McqModel::class,'cat_id_fk','cat_id');
     }
 }

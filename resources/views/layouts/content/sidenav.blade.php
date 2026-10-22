@@ -116,6 +116,40 @@
                 </li>
             </ul>
 
+            <ul class="sidebar-nav">
+                <!-- Dropdown Menu: Employees & User Management -->
+                <li class="nav-item">
+                    <a href="javascript:void(0);" class="nav-link-custom" data-sidebar-toggle="dropdown"
+                        aria-expanded="false" id="navDropdownUsers">
+                        <div class="link-left {{request()->is('showAllQuiz/mcq') ||
+                            request()->is('showAll/mcq/*') || request()->is('') 
+                            ||  request()->is('') ? 'active' : '' }}">
+                            <span class="nav-icon">
+                                <i class="fa-regular fa-rectangle-list"></i>
+                            </span>
+                            <span class="nav-text">
+                                Mcq
+                            </span>
+                        </div>
+                        <div class="link-right">
+                            <i class="bi bi-chevron-right dropdown-chevron"></i>
+                        </div>
+                    </a>
+
+                    <ul class="sidebar-submenu" style="display: none;">
+                        <li>
+                            <a href="/showAllQuiz/mcq" class="submenu-link 
+                                {{request()->is('showAllQuiz/mcq') ||  request()->is('showAll/mcq/*') 
+                                || request()->is('') || request()->is('') ? 'active' : '' }}">
+                                <i class="fa-solid fa-layer-group"></i>
+                                Mcq Questions List
+                            </a>
+                        </li>
+                    </ul>
+
+                </li>
+            </ul>
+
 
         </div>
     </aside>
