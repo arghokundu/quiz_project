@@ -25,6 +25,9 @@ return new class extends Migration
             $table->smallInteger('cat_id_fk');
             $table->foreign('cat_id_fk')->references('cat_id')->on('category')
                 ->OnDelete('cascade')->OnUpdate('cascade');
+            $table->smallInteger('admin_id_fk');
+            $table->foreign('admin_id_fk')->references('admin_id')->on('admin')
+                ->OnDelete('cascade')->OnUpdate('cascade');
             $table->timestamps();
         });
     }

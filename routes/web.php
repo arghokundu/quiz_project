@@ -22,9 +22,7 @@ Route::middleware(['adminAuth'])->group(function()
     Route::get('/showAllCategory',[categoryController::class,'showAllCate']);
     Route::get('/categoryAdd',[categoryController::class,'addCat']);
     Route::post('/storecategory',[categoryController::class,'storeCat']);
-
     Route::get('/viewcatagory/{id}',[categoryController::class,'viewCat']);
-
     Route::get('/editCate/{id}',[categoryController::class,'editCategory']);
     Route::post('/updateCate/{id}',[categoryController::class,'updateCategory']);
 
@@ -35,6 +33,9 @@ Route::middleware(['adminAuth'])->group(function()
     Route::get('/edit/quiz/{quizid}',[quizController::class,'quizEdit']);
     Route::post('/update/quiz/{id}',[quizController::class,'quizUpdate']);
     Route::get('/viewspecific/quiz/{quizid}',[quizController::class,'specificViewQuiz']);
+
+    // ======================MCQ=================================
+
     
 });
 
