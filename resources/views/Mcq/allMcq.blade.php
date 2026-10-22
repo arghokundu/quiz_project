@@ -10,7 +10,7 @@
             </h3>
         </div>
         <div class="d-flex flex-wrap gap-2 mt-3 mt-md-0">
-            <a href="#" class="btn btn-primary rounded-3 px-4">
+            <a href="/mcq/add" class="btn btn-primary rounded-3 px-4">
                 <i class="fa-solid fa-plus me-2"></i>
                 Add New Mcq
             </a>
@@ -132,11 +132,11 @@
                             </td>
                             <td>
                                 <div class="d-flex justify-content-center gap-2">
-                                    <a href="#" class="btn btn-sm btn-outline-warning rounded-2" title="Edit Category">
+                                    <a href="/mcq/edit" class="btn btn-sm btn-outline-warning rounded-2" title="Edit Category">
                                         <i class="fa-solid fa-pen-to-square me-1"></i>
                                         Edit
                                     </a>
-                                    <a href="#" class="btn btn-sm btn-outline-info rounded-2" title="View Category">
+                                    <a href="/mcq/view" class="btn btn-sm btn-outline-info rounded-2" title="View Category">
                                         <i class="fa-solid fa-eye me-1"></i>
                                         View
                                     </a>

@@ -38,4 +38,16 @@ class mcqController extends Controller
         $allMcqData=$allMcqData->paginate(5)->withQueryString();
         return view('Mcq.allMcq',compact('allMcqData','quizData'));
     }
+    public function mcqAddForm()
+    {
+        return view('Mcq.addMcq');
+    }
+    public function mcqEditForm()
+    {
+        return view('Mcq.editMcq');
+    }
+    public function mcqViewForm()
+    {
+        return view('Mcq.viewMcq');
+    }
 }

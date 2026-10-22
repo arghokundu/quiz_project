@@ -38,6 +38,10 @@ Route::middleware(['adminAuth'])->group(function()
     // ======================MCQ=================================
     Route::get('/showAllQuiz/mcq',[mcqController::class,'quizAllShowList']);
     Route::get('/showAll/mcq/{quizId}',[mcqController::class,'mcqAllShowList']);
+    Route::get('/mcq/add',[mcqController::class,'mcqAddForm']);
+    Route::get('/mcq/edit',[mcqController::class,'mcqEditForm']);
+    Route::get('/mcq/view',[mcqController::class,'mcqViewForm']);
+    
 });
 
 
