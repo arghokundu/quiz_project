@@ -41,7 +41,7 @@ Route::middleware(['adminAuth'])->group(function()
     Route::get('/mcq/add/{quizid}',[mcqController::class,'mcqAddForm']);
     Route::post('/mcq/store/{quizid}',[mcqController::class,'storeMcqQuestions']);
     Route::get('/mcq/edit',[mcqController::class,'mcqEditForm']);
-    Route::get('/mcq/view',[mcqController::class,'mcqViewForm']);
+    Route::get('/mcq/view/{mcqId}',[mcqController::class,'mcqViewForm']);
     
 });
 
