@@ -31,7 +31,7 @@
                 {{ session('error') }}
             </div>
             @endif
-            <form action="/mcq/store" id="addMcqForm" method="POST">
+            <form action="/mcq/store/{{$quizDtl->quiz_id}}" id="addMcqForm" method="POST">
                 @csrf
                 <div class="row g-4 mb-4">
                     <div class="col-12 col-md-6">
@@ -63,7 +63,7 @@
                             <span class="input-group-text bg-light">
                                 <i class="fa-solid fa-book text-secondary"></i>
                             </span>
-                            <select class="form-select" id="quizName" name="quizName" required >
+                            <select class="form-select" id="quizName" name="quizName" required>
                                 <option value="">Select Quiz</option>
                                 <option value="{{$quizDtl->quiz_id}}">
                                     {{$quizDtl->Quiz_Name}}
@@ -83,17 +83,22 @@
                         Question Details
                     </h5>
                     <div class="mb-4">
-                        <label for="questionName" class="form-label fw-semibold">
+                        <label for="Question_Name" class="form-label fw-semibold">
                             Question <span class="text-danger">*</span>
                         </label>
                         <textarea class="form-control" id="Question_Name" name="Question_Name" rows="3"
-                            placeholder="Write your question here..." required>
-                        </textarea>
+                            placeholder="Write your question here..." required></textarea>
                         @error('Question_Name')
                         <div class="text-danger small mt-2">
                             {{ $message }}
                         </div>
                         @enderror
+                        @if(session('error'))
+                        <p class="text-danger fw-semibold mt-2">
+                            <i class="fa-solid fa-circle-exclamation me-1"></i>
+                            {{ session('error') }}
+                        </p>
+                        @endif
                     </div>
                     <div class="row g-4">
                         <div class="col-12 col-md-6">

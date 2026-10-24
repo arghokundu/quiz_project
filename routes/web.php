@@ -39,7 +39,7 @@ Route::middleware(['adminAuth'])->group(function()
     Route::get('/showAllQuiz/mcq',[mcqController::class,'quizAllShowList']);
     Route::get('/showAll/mcq/{quizId}',[mcqController::class,'mcqAllShowList']);
     Route::get('/mcq/add/{quizid}',[mcqController::class,'mcqAddForm']);
-    Route::post('/mcq/store',[mcqController::class,'storeMcqQuestions']);
+    Route::post('/mcq/store/{quizid}',[mcqController::class,'storeMcqQuestions']);
     Route::get('/mcq/edit',[mcqController::class,'mcqEditForm']);
     Route::get('/mcq/view',[mcqController::class,'mcqViewForm']);
     

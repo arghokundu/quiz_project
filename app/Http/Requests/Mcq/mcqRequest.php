@@ -25,7 +25,7 @@ class mcqRequest extends FormRequest
         return [
             'categoryName'=>'required | numeric',
             'quizName'=>'required | numeric',
-            'Question_Name'=>'required | min:2 | max:350 | regex:/^[A-Za-z0-9 ]+$/ | unique:mcq,Question_Name',
+            'Question_Name'=>'required | min:2 | max:350 | regex:/^[A-Za-z0-9 ?]+$/ | unique:mcq,Question_Name',
             'option_A'=>'required | min:2 | max:350 | regex:/^[A-Za-z0-9 ]+$/',
             'option_B'=>'required | min:2 | max:350 | regex:/^[A-Za-z0-9 ]+$/',
             'option_C'=>'required | min:2 | max:350 | regex:/^[A-Za-z0-9 ]+$/',

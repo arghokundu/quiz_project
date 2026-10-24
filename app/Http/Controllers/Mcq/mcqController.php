@@ -45,9 +45,51 @@ class mcqController extends Controller
         $categoryDtl=CategoryModel::select('cat_id','category_name')->where('cat_id','=',$quizDtl->cat_id_fk)->firstOrFail();
         return view('Mcq.addMcq',compact('categoryDtl','quizDtl'));
     }
-    public function storeMcqQuestions(mcqRequest $req)
+    public function storeMcqQuestions(mcqRequest $req,$quizId)
     {
-        return view('Mcq.allMcq');
+        DB::beginTransaction();
+        try
+        {
+            $reqMcqQuestion=strtoupper($req->Question_Name);
+            $quizDtl=QuizModel::select('quiz_id','Quiz_Name','cat_id_fk')->where('quiz_id','=',$quizId)->firstOrFail();
+            $checkMcqData=McqModel::with('admin','quiz','category')
+                ->select('mcq_id','Question_Name','optionA','optionB','optionC','optionD','correct_Answer',
+                'quiz_id_fk','cat_id_fk','admin_id_fk')
+                ->where('quiz_id_fk','=',$quizDtl->quiz_id)
+                ->Where('Question_Name','=',$reqMcqQuestion)
+                ->exists();
+            if($checkMcqData)
+            {
+                DB::rollback();
+                return back()->with('error','Question already exists');
+            }
+            $mcqDtls=new McqModel();
+            $mcqDtls->Question_Name=$reqMcqQuestion;
+            $mcqDtls->optionA=$req->option_A;
+            $mcqDtls->optionB=$req->option_B;
+            $mcqDtls->optionC=$req->option_C;
+            $mcqDtls->optionD=$req->option_D;
+            $mcqDtls->correct_Answer=$req->correct_answer;
+            $mcqDtls->quiz_id_fk=$req->quizName;
+            $mcqDtls->cat_id_fk=$req->categoryName;
+            $mcqDtls->admin_id_fk=session('adminId');
+            $mcqDtls=$mcqDtls->save();
+            if($mcqDtls)
+            {
+                DB::commit();
+                return redirect('/showAll/mcq/'.$quizDtl->quiz_id)->with('success','question creation done');
+            } 
+            else
+            {
+                DB::rollback();
+                return back()->with('error','something went wrong');
+            }
+        }
+        catch(\Exception $e)
+        {
+            DB::rollback();
+            return back()->with('error',$e->getMessage());
+        }
     }
     public function mcqEditForm()
     {
