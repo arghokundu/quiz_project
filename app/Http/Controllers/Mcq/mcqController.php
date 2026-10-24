@@ -91,9 +91,16 @@ class mcqController extends Controller
             return back()->with('error',$e->getMessage());
         }
     }
-    public function mcqEditForm()
+    public function mcqEditForm($mcqId)
     {
-        return view('Mcq.editMcq');
+        $EditMcqData=McqModel::with('admin','quiz','category')
+            ->select('mcq_id','Question_Name','optionA','optionB','optionC','optionD','correct_Answer',
+            'quiz_id_fk','cat_id_fk','admin_id_fk')
+            ->findOrFail($mcqId);
+        // ---- for back to list i use this query other wise not use any think------- 
+        $quizDtl=QuizModel::select('quiz_id','Quiz_Name','cat_id_fk')->where('quiz_id','=',$EditMcqData->quiz_id_fk)->firstOrFail();
+        $categoryDtl=CategoryModel::select('cat_id','category_name')->where('cat_id','=',$quizDtl->cat_id_fk)->firstOrFail();
+        return view('Mcq.editMcq',compact('EditMcqData','quizDtl','categoryDtl'));
     }
     public function mcqViewForm($mcqId)
     {

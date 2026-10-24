@@ -132,7 +132,7 @@
                             </td>
                             <td class="text-nowrap">
                                 <div class="d-flex justify-content-center gap-2">
-                                    <a href="/mcq/edit" class="btn btn-sm btn-outline-warning rounded-2" title="Edit Category">
+                                    <a href="/mcq/edit/{{$mcq->mcq_id}}" class="btn btn-sm btn-outline-warning rounded-2" title="Edit Category">
                                         <i class="fa-solid fa-pen-to-square me-1"></i>
                                         Edit
                                     </a>

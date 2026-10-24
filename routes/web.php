@@ -40,7 +40,7 @@ Route::middleware(['adminAuth'])->group(function()
     Route::get('/showAll/mcq/{quizId}',[mcqController::class,'mcqAllShowList']);
     Route::get('/mcq/add/{quizid}',[mcqController::class,'mcqAddForm']);
     Route::post('/mcq/store/{quizid}',[mcqController::class,'storeMcqQuestions']);
-    Route::get('/mcq/edit',[mcqController::class,'mcqEditForm']);
+    Route::get('/mcq/edit/{mcqId}',[mcqController::class,'mcqEditForm']);
     Route::get('/mcq/view/{mcqId}',[mcqController::class,'mcqViewForm']);
     
 });

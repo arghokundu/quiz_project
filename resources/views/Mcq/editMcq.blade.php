@@ -9,7 +9,7 @@
                 Edit MCQ
             </h3>
         </div>
-        <a href="#" class="btn btn-outline-secondary mt-3 mt-md-0">
+        <a href="/showAll/mcq/{{$quizDtl->quiz_id}}" class="btn btn-outline-secondary mt-3 mt-md-0">
             <i class="fa-solid fa-arrow-left me-2"></i>
             Back to MCQ List
         </a>
@@ -19,7 +19,7 @@
         <div class="card-header bg-white border-bottom px-4 py-3 rounded-top-4">
             <h5 class="fw-semibold mb-1">
                 <i class="fa-solid fa-pen-to-square text-primary me-2"></i>
-                MCQ Information
+                Edit MCQ Information
             </h5>
             <small class="text-muted">
                 Select a category and quiz, then enter the question and options.
@@ -31,7 +31,7 @@
                 {{ session('error') }}
             </div>
             @endif
-            <form action="#" id="addMcqForm" method="POST">
+            <form action="#" id="editMcqForm" method="POST">
                 @csrf
                 <div class="row g-4 mb-4">
                     <div class="col-12 col-md-6">
@@ -44,9 +44,10 @@
                             </span>
                             <select class="form-select" id="categoryName" name="categoryName" required>
                                 <option value="">Select Category</option>
-
-                                <option value="">Category Name</option>
-
+                                <option value="{{$categoryDtl->cat_id}}"
+                                    {{old('categoryName',$EditMcqData->cat_id_fk)==$categoryDtl->cat_id ? 'selected' : '' }}>
+                                    {{$categoryDtl->category_name}}
+                                </option>
                             </select>
                         </div>
                         @error('categoryName')
@@ -63,10 +64,12 @@
                             <span class="input-group-text bg-light">
                                 <i class="fa-solid fa-book text-secondary"></i>
                             </span>
-                            <select class="form-select" id="quizName" name="quizName" required >
-
+                            <select class="form-select" id="quizName" name="quizName" required>
                                 <option value="">Select Quiz</option>
-
+                                <option value="{{$quizDtl->quiz_id}}"
+                                    {{old('quizName',$EditMcqData->quiz_id_fk)==$quizDtl->quiz_id ? 'selected' : '' }}>
+                                    {{$quizDtl->Quiz_Name}}
+                                </option>
                             </select>
                         </div>
                         @error('quizName')
@@ -82,17 +85,22 @@
                         Question Details
                     </h5>
                     <div class="mb-4">
-                        <label for="questionName" class="form-label fw-semibold">
+                        <label for="Question_Name" class="form-label fw-semibold">
                             Question <span class="text-danger">*</span>
                         </label>
                         <textarea class="form-control" id="Question_Name" name="Question_Name" rows="3"
-                            placeholder="Write your question here..." required>
-                        </textarea>
+                            placeholder="Write your question here..." required>{{old('Question_Name',$EditMcqData->Question_Name)}}</textarea>
                         @error('Question_Name')
                         <div class="text-danger small mt-2">
                             {{ $message }}
                         </div>
                         @enderror
+                        @if(session('error'))
+                        <p class="text-danger fw-semibold mt-2">
+                            <i class="fa-solid fa-circle-exclamation me-1"></i>
+                            {{ session('error') }}
+                        </p>
+                        @endif
                     </div>
                     <div class="row g-4">
                         <div class="col-12 col-md-6">
@@ -100,7 +108,7 @@
                                 Option A <span class="text-danger">*</span>
                             </label>
                             <input type="text" class="form-control" id="option_A" name="option_A"
-                                placeholder="Enter option A" required>
+                                placeholder="Enter option A" value="{{old('option_A',$EditMcqData->optionA)}}" required>
                             @error('option_A')
                             <div class="text-danger small mt-2">
                                 {{ $message }}
@@ -112,7 +120,7 @@
                                 Option B <span class="text-danger">*</span>
                             </label>
                             <input type="text" class="form-control" id="option_B" name="option_B"
-                                placeholder="Enter option B" required>
+                                placeholder="Enter option B" value="{{old('option_B',$EditMcqData->optionB)}}" required>
                             @error('option_B')
                             <div class="text-danger small mt-2">
                                 {{ $message }}
@@ -126,7 +134,7 @@
                                 Option C <span class="text-danger">*</span>
                             </label>
                             <input type="text" class="form-control" id="option_C" name="option_C"
-                                placeholder="Enter option C" required>
+                                placeholder="Enter option C" value="{{old('option_C',$EditMcqData->optionC)}}" required>
                             @error('option_C')
                             <div class="text-danger small mt-2">
                                 {{ $message }}
@@ -138,7 +146,7 @@
                                 Option D <span class="text-danger">*</span>
                             </label>
                             <input type="text" class="form-control" id="option_D" name="option_D"
-                                placeholder="Enter option D" required>
+                                placeholder="Enter option D" value="{{old('option_D',$EditMcqData->optionD)}}" required>
                             @error('option_D')
                             <div class="text-danger small mt-2">
                                 {{ $message }}
@@ -152,10 +160,14 @@
                         </label>
                         <select class="form-select" id="correct_answer" name="correct_answer" required>
                             <option value="">Select Correct Answer</option>
-                            <option value="A">Option A</option>
-                            <option value="B">Option B</option>
-                            <option value="C">Option C</option>
-                            <option value="D">Option D</option>
+                            <option value="A" {{old('correct_answer',$EditMcqData->correct_Answer)=='A' ? 'selected' : '' }}>
+                                Option A</option>
+                            <option value="B" {{old('correct_answer',$EditMcqData->correct_Answer)=='B' ? 'selected' : '' }}>
+                                Option B</option>
+                            <option value="C"  {{old('correct_answer',$EditMcqData->correct_Answer)=='C' ? 'selected' : '' }}>
+                                Option C</option>
+                            <option value="D"  {{old('correct_answer',$EditMcqData->correct_Answer)=='D' ? 'selected' : '' }}>
+                                Option D</option>
                         </select>
                         @error('correct_answer')
                         <div class="text-danger small mt-2">
@@ -165,13 +177,13 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-end gap-2 flex-wrap">
-                    <a href="#" class="btn btn-light border px-4 py-2">
+                    <a href="/showAll/mcq/{{$quizDtl->quiz_id}}" class="btn btn-light border px-4 py-2">
                         <i class="fa-solid fa-xmark me-2"></i>
                         Cancel
                     </a>
                     <button type="submit" class="btn btn-primary px-4 py-2">
                         <i class="fa-solid fa-floppy-disk me-2"></i>
-                        Save MCQ
+                        Update MCQ
                     </button>
                 </div>
             </form>
