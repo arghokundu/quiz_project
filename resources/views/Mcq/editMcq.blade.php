@@ -31,7 +31,7 @@
                 {{ session('error') }}
             </div>
             @endif
-            <form action="#" id="editMcqForm" method="POST">
+            <form action="/mcq/update/{{$EditMcqData->mcq_id}}" id="editMcqForm" method="POST">
                 @csrf
                 <div class="row g-4 mb-4">
                     <div class="col-12 col-md-6">

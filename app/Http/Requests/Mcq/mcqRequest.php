@@ -4,6 +4,7 @@ namespace App\Http\Requests\Mcq;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class mcqRequest extends FormRequest
 {
@@ -22,10 +23,17 @@ class mcqRequest extends FormRequest
      */
     public function rules(): array
     {
+        $mcqId = $this->route('mcqId');
         return [
             'categoryName'=>'required | numeric',
             'quizName'=>'required | numeric',
-            'Question_Name'=>'required | min:2 | max:350 | regex:/^[A-Za-z0-9 ?]+$/ | unique:mcq,Question_Name',
+            'Question_Name' => [
+                'required',
+                'min:2',
+                'max:350',
+                'regex:/^[A-Za-z0-9 ?]+$/',
+                Rule::unique('mcq', 'Question_Name')->ignore($mcqId, 'mcq_id'),
+            ],
             'option_A'=>'required | min:2 | max:350 | regex:/^[A-Za-z0-9 ]+$/',
             'option_B'=>'required | min:2 | max:350 | regex:/^[A-Za-z0-9 ]+$/',
             'option_C'=>'required | min:2 | max:350 | regex:/^[A-Za-z0-9 ]+$/',

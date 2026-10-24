@@ -97,10 +97,63 @@ class mcqController extends Controller
             ->select('mcq_id','Question_Name','optionA','optionB','optionC','optionD','correct_Answer',
             'quiz_id_fk','cat_id_fk','admin_id_fk')
             ->findOrFail($mcqId);
-        // ---- for back to list i use this query other wise not use any think------- 
         $quizDtl=QuizModel::select('quiz_id','Quiz_Name','cat_id_fk')->where('quiz_id','=',$EditMcqData->quiz_id_fk)->firstOrFail();
         $categoryDtl=CategoryModel::select('cat_id','category_name')->where('cat_id','=',$quizDtl->cat_id_fk)->firstOrFail();
         return view('Mcq.editMcq',compact('EditMcqData','quizDtl','categoryDtl'));
+    }
+    public function updateMcqForm(mcqRequest $req,$mcqId)
+    {
+        DB::beginTransaction();
+        try
+        {
+            $reqMcqQuestion = strtoupper($req->Question_Name);
+            // Find the existing MCQ
+            $checkUpdateMcqData = McqModel::with('admin','quiz','category')
+                ->select('mcq_id','Question_Name','optionA','optionB','optionC','optionD','correct_Answer',
+                'quiz_id_fk','cat_id_fk','admin_id_fk')
+                ->findOrFail($mcqId);
+            // Check whether the question already exists in another MCQ
+            $checkDuplicate = McqModel::select('mcq_id','Question_Name','optionA','optionB','optionC','optionD','correct_Answer',
+                'quiz_id_fk','cat_id_fk','admin_id_fk')
+                ->where('Question_Name', '=', $reqMcqQuestion)
+                ->where('mcq_id', '!=', $mcqId)
+                ->exists();
+            if ($checkDuplicate)
+            {
+                DB::rollback();
+                return back()->withInput()->with('error', 'Question already exists.');
+            }
+            // Find the quiz associated with the existing MCQ
+            $quizDtl = QuizModel::select('quiz_id', 'Quiz_Name', 'cat_id_fk')
+                ->where('quiz_id', '=', $checkUpdateMcqData->quiz_id_fk)->firstOrFail();
+
+            $checkUpdateMcqData->Question_Name = $reqMcqQuestion;
+            $checkUpdateMcqData->optionA = strtoupper($req->option_A);
+            $checkUpdateMcqData->optionB = strtoupper($req->option_B);
+            $checkUpdateMcqData->optionC = strtoupper($req->option_C);
+            $checkUpdateMcqData->optionD = strtoupper($req->option_D);
+            $checkUpdateMcqData->correct_Answer = $req->correct_answer;
+            $checkUpdateMcqData->quiz_id_fk = $req->quizName;
+            $checkUpdateMcqData->cat_id_fk = $req->categoryName;
+            $checkUpdateMcqData->admin_id_fk = session('adminId');
+            $saved = $checkUpdateMcqData->save();
+            if ($saved)
+            {
+                DB::commit();
+                return redirect('/showAll/mcq/'.$quizDtl->quiz_id)
+                    ->with('success', 'Question updated successfully.');
+            }
+            else
+            {
+                DB::rollback();
+                return back()->withInput()->with('error', 'Something went wrong.');
+            }
+        }
+        catch(\Exception $e)
+        {
+            DB::rollback();
+            return back()->withInput()->with('error', $e->getMessage());
+        }
     }
     public function mcqViewForm($mcqId)
     {

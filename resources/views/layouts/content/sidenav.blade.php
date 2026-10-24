@@ -122,8 +122,8 @@
                     <a href="javascript:void(0);" class="nav-link-custom" data-sidebar-toggle="dropdown"
                         aria-expanded="false" id="navDropdownUsers">
                         <div class="link-left {{request()->is('showAllQuiz/mcq') ||
-                            request()->is('showAll/mcq/*') || request()->is('') 
-                            ||  request()->is('') ? 'active' : '' }}">
+                            request()->is('showAll/mcq/*') || request()->is('mcq/edit/*') 
+                            ||  request()->is('mcq/view/*') ? 'active' : '' }}">
                             <span class="nav-icon">
                                 <i class="fa-regular fa-rectangle-list"></i>
                             </span>
@@ -140,7 +140,7 @@
                         <li>
                             <a href="/showAllQuiz/mcq" class="submenu-link 
                                 {{request()->is('showAllQuiz/mcq') ||  request()->is('showAll/mcq/*') 
-                                || request()->is('') || request()->is('') ? 'active' : '' }}">
+                                || request()->is('mcq/edit/*') || request()->is('mcq/view/*') ? 'active' : '' }}">
                                 <i class="fa-solid fa-layer-group"></i>
                                 Mcq Questions List
                             </a>
