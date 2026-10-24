@@ -11,7 +11,7 @@
                 Review question details, answer options, and the correct answer.
             </p>
         </div>
-        <a href="/showAll/mcq/{{ $quizDtl->quiz_id }}"
+        <a href="/showAll/mcq/{{ Crypt::encrypt($quizDtl->quiz_id )}}"
            class="btn btn-outline-secondary rounded-3 px-4 py-2">
             <i class="fa-solid fa-arrow-left me-2"></i>
             Back to MCQ List

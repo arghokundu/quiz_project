@@ -10,7 +10,7 @@
             </h3>
         </div>
         <div class="d-flex flex-wrap gap-2 mt-3 mt-md-0">
-            <a href="/mcq/add/{{$quizData->quiz_id}}" class="btn btn-primary rounded-3 px-4">
+            <a href="/mcq/add/{{Crypt::encrypt($quizData->quiz_id)}}" class="btn btn-primary rounded-3 px-4">
                 <i class="fa-solid fa-plus me-2"></i>
                 Add New Mcq
             </a>
@@ -58,7 +58,7 @@
                         </button>
                     </div>
                     <div class="col-auto">
-                        <a href="/showAll/mcq/{{$quizData->quiz_id}}" class="btn btn-outline-secondary px-4">
+                        <a href="/showAll/mcq/{{Crypt::encrypt($quizData->quiz_id)}}" class="btn btn-outline-secondary px-4">
                             <i class="fa-solid fa-rotate-left me-1"></i>
                             Reset
                         </a>
@@ -132,13 +132,17 @@
                             </td>
                             <td class="text-nowrap">
                                 <div class="d-flex justify-content-center gap-2">
-                                    <a href="/mcq/edit/{{$mcq->mcq_id}}" class="btn btn-sm btn-outline-warning rounded-2" title="Edit Category">
+                                    <a href="/mcq/edit/{{Crypt::encrypt($mcq->mcq_id)}}" class="btn btn-sm btn-outline-warning rounded-2" title="Edit Category">
                                         <i class="fa-solid fa-pen-to-square me-1"></i>
                                         Edit
                                     </a>
                                     <a href="/mcq/view/{{Crypt::encrypt($mcq->mcq_id)}}" class="btn btn-sm btn-outline-info rounded-2" title="View Category">
                                         <i class="fa-solid fa-eye me-1"></i>
                                         View
+                                    </a>
+                                    <a href="/delete/mcq/{{Crypt::encrypt($mcq->mcq_id)}}" class="btn btn-sm btn-outline-danger rounded-2" title="View Category">
+                                       <i class="fa-solid fa-trash-can"></i>
+                                        Delete
                                     </a>
                                 </div>
                             </td>

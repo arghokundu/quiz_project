@@ -9,7 +9,7 @@
                 Edit MCQ
             </h3>
         </div>
-        <a href="/showAll/mcq/{{$quizDtl->quiz_id}}" class="btn btn-outline-secondary mt-3 mt-md-0">
+        <a href="/showAll/mcq/{{Crypt::encrypt($quizDtl->quiz_id)}}" class="btn btn-outline-secondary mt-3 mt-md-0">
             <i class="fa-solid fa-arrow-left me-2"></i>
             Back to MCQ List
         </a>
@@ -31,7 +31,7 @@
                 {{ session('error') }}
             </div>
             @endif
-            <form action="/mcq/update/{{$EditMcqData->mcq_id}}" id="editMcqForm" method="POST">
+            <form action="/mcq/update/{{Crypt::encrypt($EditMcqData->mcq_id)}}" id="editMcqForm" method="POST">
                 @csrf
                 <div class="row g-4 mb-4">
                     <div class="col-12 col-md-6">
@@ -177,7 +177,7 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-end gap-2 flex-wrap">
-                    <a href="/showAll/mcq/{{$quizDtl->quiz_id}}" class="btn btn-light border px-4 py-2">
+                    <a href="/showAll/mcq/{{Crypt::encrypt($quizDtl->quiz_id)}}" class="btn btn-light border px-4 py-2">
                         <i class="fa-solid fa-xmark me-2"></i>
                         Cancel
                     </a>

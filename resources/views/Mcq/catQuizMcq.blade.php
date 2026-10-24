@@ -102,7 +102,7 @@
                                         <i class="fa-solid fa-pen-to-square me-1"></i>
                                         Edit
                                     </a> -->
-                                    <a href="/showAll/mcq/{{$quizD->quiz_id}}" 
+                                    <a href="/showAll/mcq/{{Crypt::encrypt($quizD->quiz_id)}}" 
                                         class="btn btn-sm btn-outline-info rounded-2" title="View Category">
                                         <i class="fa-solid fa-eye me-1"></i>
                                         View

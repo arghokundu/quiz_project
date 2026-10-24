@@ -25,6 +25,7 @@ class mcqController extends Controller
     }
     public function mcqAllShowList(Request $r,$quizId)
     {
+        $quizId=Crypt::decrypt($quizId);
         $quizData=QuizModel::select('quiz_id','Quiz_Name')->where('quiz_id','=',$quizId)->first();
 
         $allMcqData=McqModel::with('admin','quiz','category')
@@ -41,12 +42,14 @@ class mcqController extends Controller
     }
     public function mcqAddForm($quizId)
     {
+        $quizId=Crypt::decrypt($quizId);
         $quizDtl=QuizModel::select('quiz_id','Quiz_Name','cat_id_fk')->where('quiz_id','=',$quizId)->firstOrFail();
         $categoryDtl=CategoryModel::select('cat_id','category_name')->where('cat_id','=',$quizDtl->cat_id_fk)->firstOrFail();
         return view('Mcq.addMcq',compact('categoryDtl','quizDtl'));
     }
     public function storeMcqQuestions(mcqRequest $req,$quizId)
     {
+        $quizId=Crypt::decrypt($quizId);
         DB::beginTransaction();
         try
         {
@@ -77,7 +80,7 @@ class mcqController extends Controller
             if($mcqDtls)
             {
                 DB::commit();
-                return redirect('/showAll/mcq/'.$quizDtl->quiz_id)->with('success','question creation done');
+                return redirect('/showAll/mcq/'.Crypt::encrypt($quizDtl->quiz_id))->with('success','question creation done');
             } 
             else
             {
@@ -93,6 +96,7 @@ class mcqController extends Controller
     }
     public function mcqEditForm($mcqId)
     {
+        $mcqId=Crypt::decrypt($mcqId);
         $EditMcqData=McqModel::with('admin','quiz','category')
             ->select('mcq_id','Question_Name','optionA','optionB','optionC','optionD','correct_Answer',
             'quiz_id_fk','cat_id_fk','admin_id_fk')
@@ -103,6 +107,7 @@ class mcqController extends Controller
     }
     public function updateMcqForm(mcqRequest $req,$mcqId)
     {
+        $mcqId=Crypt::decrypt($mcqId);
         DB::beginTransaction();
         try
         {
@@ -140,7 +145,7 @@ class mcqController extends Controller
             if ($saved)
             {
                 DB::commit();
-                return redirect('/showAll/mcq/'.$quizDtl->quiz_id)
+                return redirect('/showAll/mcq/'.Crypt::encrypt($quizDtl->quiz_id))
                     ->with('success', 'Question updated successfully.');
             }
             else
@@ -166,4 +171,20 @@ class mcqController extends Controller
         $quizDtl=QuizModel::select('quiz_id','Quiz_Name','cat_id_fk')->where('quiz_id','=',$McqData->quiz_id_fk)->firstOrFail();
         return view('Mcq.viewMcq',compact('McqData','quizDtl'));
     }
+    
+    public function deleteMcq($mcqId)
+    {
+         $mcqId=Crypt::decrypt($mcqId);
+        $deleteMcqData = McqModel::select('mcq_id','Question_Name','optionA','optionB','optionC',
+            'optionD','correct_Answer','quiz_id_fk','cat_id_fk','admin_id_fk')->findOrFail($mcqId);
+        // Get quiz details before deleting the MCQ
+        $quizDtl = QuizModel::select('quiz_id', 'Quiz_Name', 'cat_id_fk')->where('quiz_id', '=', $deleteMcqData->quiz_id_fk)->firstOrFail();
+        $deleteMcq = $deleteMcqData->delete();
+        if ($deleteMcq)
+        {
+            return redirect('/showAll/mcq/'.Crypt::encrypt($quizDtl->quiz_id))->with('success', 'Question deleted successfully.');
+        }
+        return back()->with('error', 'Something went wrong.');
+    }
+
 }

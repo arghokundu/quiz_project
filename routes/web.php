@@ -43,7 +43,7 @@ Route::middleware(['adminAuth'])->group(function()
     Route::get('/mcq/edit/{mcqId}',[mcqController::class,'mcqEditForm']);
     Route::post('/mcq/update/{mcqId}',[mcqController::class,'updateMcqForm']);
     Route::get('/mcq/view/{mcqId}',[mcqController::class,'mcqViewForm']);
-    
+    Route::get('/delete/mcq/{mcqId}',[mcqController::class,'deleteMcq']); 
 });
 
 
