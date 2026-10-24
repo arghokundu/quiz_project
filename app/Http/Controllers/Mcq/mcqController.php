@@ -65,10 +65,10 @@ class mcqController extends Controller
             }
             $mcqDtls=new McqModel();
             $mcqDtls->Question_Name=$reqMcqQuestion;
-            $mcqDtls->optionA=$req->option_A;
-            $mcqDtls->optionB=$req->option_B;
-            $mcqDtls->optionC=$req->option_C;
-            $mcqDtls->optionD=$req->option_D;
+            $mcqDtls->optionA=strtoupper($req->option_A);
+            $mcqDtls->optionB=strtoupper($req->option_B);
+            $mcqDtls->optionC=strtoupper($req->option_C);
+            $mcqDtls->optionD=strtoupper($req->option_D);
             $mcqDtls->correct_Answer=$req->correct_answer;
             $mcqDtls->quiz_id_fk=$req->quizName;
             $mcqDtls->cat_id_fk=$req->categoryName;

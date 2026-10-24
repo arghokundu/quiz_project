@@ -58,7 +58,7 @@
                         </button>
                     </div>
                     <div class="col-auto">
-                        <a href="#" class="btn btn-outline-secondary px-4">
+                        <a href="/showAll/mcq/{{$quizData->quiz_id}}" class="btn btn-outline-secondary px-4">
                             <i class="fa-solid fa-rotate-left me-1"></i>
                             Reset
                         </a>
@@ -72,38 +72,38 @@
                 <table class="table table-hover align-middle mb-0" id="listStd">
                     <thead class="table-light">
                         <tr>
-                            <th class="ps-4 py-3 text-muted small text-uppercase" style="width: 90px;">
+                            <th class="ps-4 py-3 text-muted small text-uppercase text-nowrap" style="width: 90px;">
                                 Sl. No.
                             </th>
-                            <th class="py-3 text-muted small text-uppercase">
+                            <th class="py-3 text-muted small text-uppercase text-nowrap">
                                 Question
                             </th>
-                            <th class="py-3 text-muted small text-uppercase">
+                            <th class="py-3 text-muted small text-uppercase text-nowrap">
                                 Option A
                             </th>
-                            <th class="py-3 text-muted small text-uppercase">
+                            <th class="py-3 text-muted small text-uppercase text-nowrap">
                                 Option B
                             </th>
-                            <th class="py-3 text-muted small text-uppercase">
+                            <th class="py-3 text-muted small text-uppercase text-nowrap">
                                 Option C
                             </th>
-                            <th class="py-3 text-muted small text-uppercase">
+                            <th class="py-3 text-muted small text-uppercase text-nowrap">
                                 Option D
                             </th>
-                            <th class="py-3 text-muted small text-uppercase">
+                            <th class="py-3 text-muted small text-uppercase text-nowrap">
                                 Correct Answer
                             </th>
-                            <th class="py-3 text-muted small text-uppercase text-center" style="width: 200px;">
+                            <th class="py-3 text-muted small text-uppercase text-center text-nowrap" style="width: 200px;">
                                 Actions
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{--@foreach($quizData as $quizD)--}}
+                        @foreach($allMcqData as $mcq)
                         <tr>
                             <td class="ps-4">
                                 <span
-                                    class="text-muted fw-semibold">{{--{{$quizData->firstItem() + $loop->index}}--}}#</span>
+                                    class="text-muted fw-semibold">{{$allMcqData->firstItem() + $loop->index}}</span>
                             </td>
                             <td>
                                 <div class="d-flex align-items-center gap-3">
@@ -111,26 +111,26 @@
                                         d-flex align-items-center justify-content-center">
                                     </div>
                                     <div>
-                                        <div class="fw-semibold text-dark">#</div>
+                                        <div class="fw-semibold text-dark text-nowrap">{{$mcq->Question_Name}}</div>
                                     </div>
                                 </div>
                             </td>
                             <td>
-                                <span class="text-secondary">#</span>
+                                <span class="text-secondary text-nowrap">{{$mcq->optionA}}</span>
                             </td>
                             <td>
-                                <span class="text-secondary">#</span>
+                                <span class="text-secondary text-nowrap">{{$mcq->optionB}}</span>
                             </td>
                             <td>
-                                <span class="text-secondary">#</span>
+                                <span class="text-secondary text-nowrap">{{$mcq->optionC}}</span>
                             </td>
                             <td>
-                                <span class="text-secondary">#</span>
+                                <span class="text-secondary text-nowrap">{{$mcq->optionD}}</span>
                             </td>
-                            <td>
-                                <span class="text-secondary">#</span>
+                            <td class="text-center">
+                                <span class="text-secondary">{{$mcq->correct_Answer}}</span>
                             </td>
-                            <td>
+                            <td class="text-nowrap">
                                 <div class="d-flex justify-content-center gap-2">
                                     <a href="/mcq/edit" class="btn btn-sm btn-outline-warning rounded-2" title="Edit Category">
                                         <i class="fa-solid fa-pen-to-square me-1"></i>
@@ -143,7 +143,7 @@
                                 </div>
                             </td>
                         </tr>
-                        {{--@endforeach--}}
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -157,7 +157,7 @@
                 </small>
             </div>
             <div>
-                {{--{{$quizData->links('pagination::bootstrap-5')}}--}}
+                {{$allMcqData->links('pagination::bootstrap-5')}}
             </div>
         </div>
     </div>
