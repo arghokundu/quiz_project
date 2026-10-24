@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="{{asset('assets/css/common.css')}}">
     <!-- chat Common CSS -->
     <link rel="stylesheet" href="{{asset('assets/css/chat.css')}}">
+
+    <link rel="stylesheet" href="{{ asset('assets/css/mcq/mcq_view.css') }}">
 </head>
 
 <body>

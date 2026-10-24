@@ -97,6 +97,7 @@ class mcqController extends Controller
     }
     public function mcqViewForm($mcqId)
     {
+        $mcqId=Crypt::decrypt($mcqId);
         $McqData=McqModel::with('admin','quiz','category')
             ->select('mcq_id','Question_Name','optionA','optionB','optionC','optionD','correct_Answer',
             'quiz_id_fk','cat_id_fk','admin_id_fk')
