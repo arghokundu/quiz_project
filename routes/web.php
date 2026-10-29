@@ -7,6 +7,7 @@ use App\Http\Controllers\Category\categoryController;
 use App\Http\Controllers\Quiz\quizController;
 use App\Http\Controllers\Mcq\mcqController;
 use App\Http\Controllers\Dashboard\dashboardController;
+use App\Http\Controllers\User\userController;
 
 Route::get('/', [dashboardController::class, 'dashboard'])->name('dashboard');
 
@@ -46,7 +47,7 @@ Route::middleware(['adminAuth'])->group(function()
 });
 
 
-
+Route::get('/user/Dashboard',[userController::class,'dashBoard']);
 
 
 
