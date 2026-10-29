@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\adminLoginRequest;
 use App\Models\Admin\AdminModel;
-
 class adminController extends Controller
 {
+
     public function loginPage()
     {
         return view('login.adminLogin');
@@ -27,7 +27,7 @@ class adminController extends Controller
                 'adminEmail' => $checkUserExists->emailId,
                 'adminRole' => $checkUserExists->role,
             ]);
-            return view('layouts.mainApp');
+            return redirect('/');
         }
         else
         {

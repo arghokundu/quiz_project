@@ -6,10 +6,9 @@ use App\Http\Middleware\Admin\adminLogOrNot;
 use App\Http\Controllers\Category\categoryController;
 use App\Http\Controllers\Quiz\quizController;
 use App\Http\Controllers\Mcq\mcqController;
+use App\Http\Controllers\Dashboard\dashboardController;
 
-Route::get('/', function () {
-    return view('layouts.mainApp');
-});
+Route::get('/', [dashboardController::class, 'dashboard'])->name('dashboard');
 
 Route::get('/login',[adminController::class,'loginPage']);
 Route::post('/loginEntry',[adminController::class,'loginAdmin']);
