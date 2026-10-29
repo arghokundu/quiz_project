@@ -27,7 +27,7 @@ class adminController extends Controller
                 'adminEmail' => $checkUserExists->emailId,
                 'adminRole' => $checkUserExists->role,
             ]);
-            return redirect('/');
+            return redirect('/admin/dashboard');
         }
         else
         {

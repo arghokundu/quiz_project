@@ -9,7 +9,10 @@ use App\Http\Controllers\Mcq\mcqController;
 use App\Http\Controllers\Dashboard\dashboardController;
 use App\Http\Controllers\User\userController;
 
-Route::get('/', [dashboardController::class, 'dashboard'])->name('dashboard');
+
+Route::get('/',[userController::class,'dashBoard']);
+
+Route::get('/admin/dashboard', [dashboardController::class, 'dashboard']);
 
 Route::get('/login',[adminController::class,'loginPage']);
 Route::post('/loginEntry',[adminController::class,'loginAdmin']);
@@ -45,9 +48,3 @@ Route::middleware(['adminAuth'])->group(function()
     Route::get('/mcq/view/{mcqId}',[mcqController::class,'mcqViewForm']);
     Route::get('/delete/mcq/{mcqId}',[mcqController::class,'deleteMcq']); 
 });
-
-
-Route::get('/user/Dashboard',[userController::class,'dashBoard']);
-
-
-

@@ -5,6 +5,19 @@
     <aside id="sideNavbar" aria-label="Main Navigation">
 
         <!-- Brand Logo Header -->
+         @if(session()->has('adminId'))
+        <div class="sidebar-header">
+            <a href="/admin/dashboard" class="brand-logo" id="brandLogo">
+                <div class="brand-icon">
+                    <i class="bi bi-layers-half"></i>
+                </div>
+                <span class="brand-text">Quiz<span>System</span></span>
+            </a>
+            <button type="button" class="btn-sidebar-toggle d-lg-none" aria-label="Close sidebar">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+        @else
         <div class="sidebar-header">
             <a href="/" class="brand-logo" id="brandLogo">
                 <div class="brand-icon">
@@ -16,6 +29,7 @@
                 <i class="bi bi-x-lg"></i>
             </button>
         </div>
+        @endif
 
         <!-- Scrollable Navigation Body -->
         <div class="sidebar-body">
@@ -29,6 +43,19 @@
 
             <ul class="sidebar-nav">
                 <!-- Active Single Link: Overview -->
+                @if(session()->has('adminId'))
+                <li class="nav-item">
+                    <a href="/admin/dashboard" class="nav-link-custom active" id="navDashboard">
+                        <div class="link-left">
+                            <span class="nav-icon"><i class="bi bi-grid-1x2-fill"></i></span>
+                            <span class="nav-text">Dashboard</span>
+                        </div>
+                        <div class="link-right">
+                            <span class="badge badge-custom badge-primary">New</span>
+                        </div>
+                    </a>
+                </li>
+                @else
                 <li class="nav-item">
                     <a href="/" class="nav-link-custom active" id="navDashboard">
                         <div class="link-left">
@@ -40,6 +67,7 @@
                         </div>
                     </a>
                 </li>
+                @endif
             </ul>
 
             <!-- ----------------------------------------------------------------
