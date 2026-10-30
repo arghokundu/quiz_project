@@ -75,7 +75,7 @@
              ---------------------------------------------------------------- -->
             <div class="sidebar-heading">Management</div>
             <div class="sidebar-heading-divider"></div>
-            {{--@if(session()->has('adminId'))--}}
+            @if(session()->has('adminId'))
             <ul class="sidebar-nav">
                 <!-- Dropdown Menu: Employees & User Management -->
                 <li class="nav-item">
@@ -108,7 +108,7 @@
 
                 </li>
             </ul>
-            {{--@endif--}}
+            
             
             <ul class="sidebar-nav">
                 <!-- Dropdown Menu: Employees & User Management -->
@@ -178,6 +178,42 @@
 
                 </li>
             </ul>
+            @else
+            <ul class="sidebar-nav">
+                <!-- Dropdown Menu: Employees & User Management -->
+                <li class="nav-item">
+                    <a href="javascript:void(0);" class="nav-link-custom" data-sidebar-toggle="dropdown"
+                        aria-expanded="false" id="navDropdownUsers">
+                        <div class="link-left {{request()->is('') ||
+                            request()->is('') || request()->is('') 
+                            ||  request()->is('') || request()->is('')  ? 'active' : '' }}">
+                            <span class="nav-icon">
+                                <i class="fa-regular fa-rectangle-list"></i>
+                            </span>
+                            <span class="nav-text">
+                                User
+                            </span>
+                        </div>
+                        <div class="link-right">
+                            <i class="bi bi-chevron-right dropdown-chevron"></i>
+                        </div>
+                    </a>
+
+                    <ul class="sidebar-submenu" style="display: none;">
+                        <li>
+                            <a href="#" class="submenu-link 
+                                {{request()->is('') ||  request()->is('') 
+                                || request()->is('') || request()->is('') || 
+                                    request()->is('') ? 'active' : '' }}">
+                                <i class="fa-solid fa-layer-group"></i>
+                                user List
+                            </a>
+                        </li>
+                    </ul>
+
+                </li>
+            </ul>
+            @endif
 
 
         </div>
