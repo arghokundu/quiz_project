@@ -1,0 +1,231 @@
+
+/* =========================================
+   CATEGORY CARD DESIGN
+========================================= */
+
+.category-card {
+    position: relative;
+    background: #ffffff;
+    border: 1px solid #e8ecf4;
+    border-radius: 18px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 15px rgba(30, 41, 59, 0.04);
+    transition: all 0.3s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-7px);
+    border-color: #c7c5ff;
+    box-shadow: 0 15px 35px rgba(79, 70, 229, 0.12);
+}
+
+/* Top Accent */
+
+.category-card-accent {
+    height: 5px;
+    width: 100%;
+    background: linear-gradient(90deg, #4f46e5, #8b5cf6, #06b6d4);
+}
+
+/* Category Icon */
+
+.category-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    background: #eeedff;
+    color: #5548e8;
+    font-size: 23px;
+    transition: all 0.3s ease;
+}
+
+.category-card:hover .category-icon {
+    background: #5548e8;
+    color: #ffffff;
+    transform: rotate(-5deg) scale(1.05);
+}
+
+/* Status */
+
+.category-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 13px;
+    border-radius: 30px;
+    background: #f1f5f9;
+    color: #475569;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-indicator {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #64748b;
+}
+
+/* Category Information */
+
+.category-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    color: #8b91a5;
+}
+
+.category-title {
+    color: #1e293b;
+    font-size: 21px;
+    font-weight: 750;
+    letter-spacing: -0.5px;
+}
+
+.category-description {
+    color: #8a94a6;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+/* Category Details */
+
+.category-details {
+    padding: 16px;
+    background: #f8faff;
+    border: 1px solid #edf0f7;
+    border-radius: 13px;
+}
+
+.detail-icon {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    background: #eeedff;
+    color: #5b50e6;
+    font-size: 12px;
+}
+
+.detail-label {
+    font-size: 12px;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.detail-value {
+    color: #334155;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.question-bank-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #5548e8;
+}
+
+.category-divider {
+    height: 1px;
+    background: #e9edf5;
+    margin: 13px 0;
+}
+
+/* Footer Actions */
+
+.category-card-footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 17px 20px;
+    /* border-top: 1px solid #edf0f5; */
+    background: #ffffff;
+}
+
+.btn-category-primary {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    padding: 12px 15px;
+    border-radius: 11px;
+    background: #5145e5;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 650;
+    transition: all 0.25s ease;
+}
+
+.btn-category-primary:hover {
+    background: #4035cb;
+    color: #ffffff;
+    box-shadow: 0 5px 14px rgba(81, 69, 229, 0.22);
+}
+
+.btn-category-view {
+    width: 43px;
+    height: 43px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e4e8f0;
+    border-radius: 11px;
+    background: #ffffff;
+    color: #64748b;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.btn-category-view:hover {
+    background: #eeedff;
+    color: #5145e5;
+    border-color: #c7c5ff;
+}
+
+/* Empty State */
+
+.category-empty-state {
+    background: #ffffff;
+    border: 1px dashed #cbd5e1;
+    border-radius: 18px;
+}
+
+.empty-icon {
+    width: 75px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background: #eeedff;
+    color: #5145e5;
+    font-size: 30px;
+}
+
+/* Responsive */
+
+@media (max-width: 576px) {
+
+    .category-title {
+        font-size: 19px;
+    }
+
+    .category-card-footer {
+        padding: 14px;
+    }
+
+    .btn-category-primary {
+        font-size: 12px;
+    }
+
+}

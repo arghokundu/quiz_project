@@ -27,6 +27,8 @@
     <link rel="stylesheet" href="{{asset('assets/css/chat.css')}}">
 
     <link rel="stylesheet" href="{{ asset('assets/css/mcq/mcq_view.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets/css/userDashb/userDas.css') }}">
 </head>
 
 <body>

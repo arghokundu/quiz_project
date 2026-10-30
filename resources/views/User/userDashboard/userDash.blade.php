@@ -149,88 +149,85 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-flex align-items-center gap-2">
-                    <a href="" class="btn btn-sm btn-primary rounded-pill px-3">
-                        <i class="fa-solid fa-arrow-up-right-from-square me-1"></i> Manage MCQs
-                    </a>
-                </div>
             </div>
-
-
-
-            <!-- 1. CARDS GRID VIEW (Visual & Modern) -->
-            <div id="quizGridView" class="row g-3 g-md-4 py-2">
+            <!-- Category Cards Grid -->
+            <div id="quizGridView" class="row g-4 py-3">
                 @forelse($categories as $cat)
                 <div class="col-12 col-md-6 col-xl-4 quiz-item-card">
-                    <div class="quiz-grid-card">
-                        <div class="quiz-card-accent-bar"></div>
-                        <div>
-                            <!-- Card Header Top -->
-                            <div class="quiz-card-top">
-                                <div class="d-flex align-items-center gap-2">
-                                    <div class="quiz-avatar-icon">
-                                        <i class="fa-solid"></i>
-                                    </div>
-                                    <span class="cat-tag">
-                                        {{ $cat->category_name }}
-                                    </span>
+                    <div class="category-card h-70">
+                        <!-- Card Top Accent -->
+                        <div class="category-card-accent"></div>
+                        <div class="p-4">
+                            <!-- Header -->
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div class="category-icon">
+                                    <i class="fa-solid fa-layer-group"></i>
                                 </div>
-                                <div>
-                                    @if($totalCatagory > 0)
-                                    <span class="status-pill ready">
-                                        <span class="status-dot"></span> Ready
-                                    </span>
-                                    @else
-                                    <span class="status-pill pending">
-                                        <span class="status-dot"></span> Needs Questions
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-                            <!-- Quiz Title & Meta -->
-                            <h3 class="quiz-card-title">{{ $cat->category_name }}</h3>
-                            <div class="quiz-card-meta">
-                                <span>•</span>
-                                <span>
-                                    <i class="fa-regular fa-calendar me-1"></i>
+                                <span class="status-pill ready">
+                                    <span class="status-dot"></span> Category
                                 </span>
                             </div>
-                            <!-- Question Readiness Meter -->
-                            <div class="quiz-card-meter">
-                                <div class="quiz-meter-header">
-                                    <span class="text-muted small">
-                                        <i class="fa-solid fa-list-ol me-1 text-primary"></i>
-                                        Question Bank
-                                    </span>
-                                    <span class="fw-bold"></span>
-                                </div>
-                                <div class="quiz-meter-bar">
-                                    <div class="quiz-meter-fill"></div>
-                                </div>
+                            <!-- Category Information -->
+                            <div class="category-information">
+                                <span class="category-label">
+                                    QUIZ CATEGORY
+                                </span>
+                                <h4 class="category-title text-truncate mt-2 mb-2">
+                                    {{ $cat->category_name }}
+                                </h4>
+                                <p class="category-description mb-0">
+                                    Manage questions and organize your quiz content.
+                                </p>
                             </div>
+                            <!-- Category Details -->
+                            <!-- <div class="category-details mt-2">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="detail-icon">
+                                            <i class="fa-solid fa-list-check"></i>
+                                        </div>
+                                        <span class="detail-label">
+                                            Question Bank
+                                        </span>
+                                    </div>
+                                    <span class="question-bank-label">
+                                        Manage Questions
+                                    </span>
+                                </div>
+                            </div> -->
                         </div>
-                        <!-- Card Action Footer -->
-                        <div class="quiz-card-actions">
-                            <a href="#" class="btn-card-action btn-card-primary" title="View & Manage MCQs">
-                                <i class="fa-solid fa-layer-group"></i>
-                                Manage MCQs
+                        <!-- Footer Actions -->
+                        <div class="category-card-footer">
+                            <a href="#" class="btn-category-primary" title="View and Manage MCQs">
+                                <i class="fa-solid fa-layer-group me-2"></i>
+                                Explore Quizes
+                                <i class="fa-solid fa-arrow-right ms-auto"></i>
                             </a>
-                            <a href="#" class="btn-card-icon" title="View Quiz Details">
+                            <a href="#" class="btn-category-view" title="View Category Details">
                                 <i class="fa-solid fa-eye"></i>
                             </a>
                         </div>
                     </div>
                 </div>
                 @empty
-                <div class="col-12 text-center py-5">
-                    <i class="fa-regular fa-folder-open fa-3x text-muted mb-3 d-block"></i>
-                    <h5 class="fw-bold text-dark">No Quizzes Found</h5>
-                    <p class="text-muted small">
-                        Get started by creating your very first quiz set.
-                    </p>
+                <!-- Empty State -->
+                <div class="col-12">
+                    <div class="category-empty-state text-center py-5">
+                        <div class="empty-icon mx-auto mb-3">
+                            <i class="fa-regular fa-folder-open"></i>
+                        </div>
+                        <h5 class="fw-bold text-dark mb-2">
+                            No Categories Found
+                        </h5>
+                        <p class="text-muted mb-0">
+                            There are no quiz categories available right now.
+                            Create your first category to get started.
+                        </p>
+                    </div>
                 </div>
                 @endforelse
             </div>
+
         </div>
         <div class="dash-card-header bg-light border-0 py-2 px-4">
             <small class="text-muted">
