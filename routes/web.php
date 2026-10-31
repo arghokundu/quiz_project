@@ -8,6 +8,7 @@ use App\Http\Controllers\Quiz\quizController;
 use App\Http\Controllers\Mcq\mcqController;
 use App\Http\Controllers\Dashboard\dashboardController;
 use App\Http\Controllers\User\userController;
+use App\Http\Controllers\User\userCatController;
 
 
 Route::get('/',[userController::class,'dashBoard']);
@@ -48,3 +49,6 @@ Route::middleware(['adminAuth'])->group(function()
     Route::get('/mcq/view/{mcqId}',[mcqController::class,'mcqViewForm']);
     Route::get('/delete/mcq/{mcqId}',[mcqController::class,'deleteMcq']); 
 });
+
+// ==========================user here========================
+Route::get('/user/cat/list',[userCatController::class,'userCatAllList']);
