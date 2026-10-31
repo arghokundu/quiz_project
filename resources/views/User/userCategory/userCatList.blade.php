@@ -51,7 +51,7 @@
                     </div>
                     {{-- Card Footer --}}
                     <div class="category-card-footer">
-                        <a href="#" class="btn-category-primary">
+                        <a href="/user/quiz/list/view/{{$cat->cat_id}}" class="btn-category-primary">
                             <span>
                                 <i class="fa-solid fa-compass me-2"></i>
                                 Explore Quizzes

@@ -9,6 +9,7 @@ use App\Http\Controllers\Mcq\mcqController;
 use App\Http\Controllers\Dashboard\dashboardController;
 use App\Http\Controllers\User\userController;
 use App\Http\Controllers\User\userCatController;
+use App\Http\Controllers\User\userQuizController;
 
 
 Route::get('/',[userController::class,'dashBoard']);
@@ -52,3 +53,5 @@ Route::middleware(['adminAuth'])->group(function()
 
 // ==========================user here========================
 Route::get('/user/cat/list',[userCatController::class,'userCatAllList']);
+
+Route::get('/user/quiz/list/view/{catId}',[userQuizController::class,'userQuizView']);
