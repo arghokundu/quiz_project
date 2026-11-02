@@ -52,7 +52,7 @@
                         </div>
                         {{-- Card Footer --}}
                         <div class="quiz-card-footer">
-                            <a href="#" class="quiz-start-button">
+                            <a href="/user/mcq/specific/{{$quiz->quiz_id}}" class="quiz-start-button">
                                 <span class="quiz-button-text">
                                     <i class="fa-solid fa-circle-play"></i>
                                     Start Assignment
