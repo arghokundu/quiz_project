@@ -90,18 +90,32 @@
             </div>
             {{-- Navigation Buttons --}}
             <div class="mcq-controls-footer">
-                <div class="d-flex align-items-center gap-3">
-                    @if($currentQuiz['currentMcq'] < $currentQuiz['totalMcq']) 
-                        {{-- Next Button --}} 
+                <div class="mcq-navigation-info">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>
+                        Question {{ $currentQuiz['currentMcq'] }}
+                        of {{ $currentQuiz['totalMcq'] }}
+                    </span>
+                </div>
+                <div class="mcq-navigation-buttons">
+                    {{-- Previous Button --}}
+                    @if($currentQuiz['currentMcq'] != 1)
+                    <a href="{{ url()->previous() }}" class="mcq-btn-action mcq-btn-previous">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>Previous</span>
+                    </a>
+                    @endif
+                    @if($currentQuiz['currentMcq'] < $currentQuiz['totalMcq'])
+                        {{-- Next Button --}}
                         <button type="submit" name="action" value="next" class="mcq-btn-action mcq-btn-next">
-                            <span>Next</span>
+                            <span>Next Question</span>
                             <i class="fa-solid fa-arrow-right"></i>
                         </button>
-                        @else
+                    @else
                         {{-- Final Submit Button --}}
                         <button type="submit" name="action" value="finish" class="mcq-btn-action mcq-btn-submit">
-                            <i class="fa-solid fa-paper-plane"></i>
                             <span>Submit Quiz</span>
+                            <i class="fa-solid fa-circle-check"></i>
                         </button>
                     @endif
                 </div>
