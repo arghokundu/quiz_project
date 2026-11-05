@@ -1,0 +1,255 @@
+/* =========================================
+   PROFESSIONAL USER QUIZ RESULT PAGE
+========================================= */
+
+.user-result-page {
+    background: #f5f7fc;
+    min-height: 85vh;
+}
+
+.result-card {
+    max-width: 850px;
+    background: #ffffff;
+    border: 1px solid #e9edf5;
+    border-radius: 22px;
+    padding: 35px;
+    box-shadow: 0 10px 40px rgba(30, 50, 90, 0.07);
+}
+
+/* Trophy Section */
+
+.result-trophy {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.trophy-circle {
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(135deg, #fff1c2, #ffe08a);
+    color: #d99a00;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    margin: 0 auto 18px;
+    box-shadow: 0 8px 20px rgba(217, 154, 0, 0.15);
+}
+
+.result-trophy h2 {
+    font-size: 27px;
+    font-weight: 750;
+    color: #25324b;
+}
+
+.result-trophy p {
+    color: #7b8799;
+    font-size: 14px;
+}
+
+/* Score Section */
+
+.result-score-section {
+    text-align: center;
+    padding: 15px 0 30px;
+}
+
+/* .score-circle {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: conic-gradient(
+        #3157c8 0% 75%,
+        #e9eef7 75% 100%
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto auto 20px;
+    position: relative;
+}
+
+.score-circle::before {
+    content: "";
+    position: absolute;
+    width: 155px;
+    height: 155px;
+    background: white;
+    border-radius: 50%;
+} */
+
+.score-content {
+    position: relative;
+    z-index: 1;
+}
+
+.score-content h1 {
+    font-size: 36px;
+    font-weight: 800;
+    color: #3157c8;
+    margin-bottom: 0;
+}
+
+.score-content span {
+    color: #8b96a8;
+    font-size: 13px;
+}
+
+.result-score-section h3 {
+    font-size: 21px;
+    font-weight: 700;
+    color: #25324b;
+}
+
+.result-score-section p {
+    color: #7b8799;
+    margin-bottom: 0;
+}
+
+/* Statistics */
+
+.result-statistics {
+    margin: 10px 0 25px;
+}
+
+.stat-box {
+    border-radius: 14px;
+    padding: 20px 10px;
+    text-align: center;
+    border: 1px solid transparent;
+    height: 100%;
+}
+
+.stat-icon {
+    font-size: 25px;
+    margin-bottom: 8px;
+}
+
+.stat-box h3 {
+    font-size: 28px;
+    font-weight: 750;
+    margin-bottom: 3px;
+}
+
+.stat-box span {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.correct-stat {
+    background: #edfaf3;
+    border-color: #d4f1df;
+    color: #159653;
+}
+
+.wrong-stat {
+    background: #fff0f0;
+    border-color: #f9dada;
+    color: #dc4545;
+}
+
+.skipped-stat {
+    background: #fff8e9;
+    border-color: #f6e8c5;
+    color: #c58b16;
+}
+
+/* Performance */
+
+.performance-section {
+    padding: 20px;
+    background: #f8faff;
+    border-radius: 13px;
+    margin-bottom: 25px;
+}
+
+.performance-section span {
+    color: #59677e;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.performance-section strong {
+    color: #3157c8;
+}
+
+.performance-progress {
+    height: 11px;
+    border-radius: 20px;
+    background: #e4eaf4;
+}
+
+.performance-progress .progress-bar {
+    background: linear-gradient(90deg, #3157c8, #6386ef);
+    border-radius: 20px;
+}
+
+/* Buttons */
+
+.result-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.result-actions .btn {
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 650;
+    font-size: 14px;
+    transition: 0.25s ease;
+}
+
+.btn-retake {
+    background: #3157c8;
+    color: #fff;
+}
+
+.btn-retake:hover {
+    background: #2445a8;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.btn-dashboard {
+    background: #eef2f8;
+    color: #34415a;
+}
+
+.btn-dashboard:hover {
+    background: #dfe6f2;
+    color: #25324b;
+    transform: translateY(-2px);
+}
+
+/* Mobile */
+
+@media (max-width: 576px) {
+    .result-card {
+        padding: 22px 15px;
+    }
+
+    .result-trophy h2 {
+        font-size: 23px;
+    }
+
+    .score-circle {
+        width: 155px;
+        height: 155px;
+    }
+
+    .score-circle::before {
+        width: 133px;
+        height: 133px;
+    }
+
+    .score-content h1 {
+        font-size: 30px;
+    }
+
+    .result-actions .btn {
+        width: 100%;
+    }
+}

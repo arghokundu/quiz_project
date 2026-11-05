@@ -30,6 +30,8 @@
 
     <link rel="stylesheet" href="{{ asset('assets/css/userDashb/userDas.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('assets/css/userDashb/result.css') }}">
+
     <link rel="stylesheet" href="{{ asset('assets/css/userDashb/userMcqAssessment.css') }}">
 </head>
 
