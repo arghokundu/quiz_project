@@ -1,145 +1,117 @@
 @extends('layouts.mainApp')
 @section('main_content')
-<div class="container-fluid px-3 px-md-4 py-4 mcq-view-page">
-    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
-        <div>
-            <h3 class="fw-bold text-dark mb-2">
-                <i class="fa-solid fa-circle-question text-primary me-2"></i>
-                MCQ Details
-            </h3>
-            <p class="text-muted mb-0">
-                Review question details, answer options, and the correct answer.
-            </p>
-        </div>
-        <!-- <a href="/showAll/mcq/{{--{{ Crypt::encrypt($quizDtl->quiz_id )}}--}}"
-           class="btn btn-outline-secondary rounded-3 px-4 py-2">
-            <i class="fa-solid fa-arrow-left me-2"></i>
-            Back to MCQ List
-        </a> -->
-    </div>
-    <div class="card mcq-detail-card border-0 shadow-sm rounded-4 mx-auto overflow-hidden">
-        <div class="card-header bg-white border-bottom px-4 px-md-5 py-4">
-            <div class="d-flex align-items-center gap-3">
-                <div class="mcq-header-icon rounded-3 bg-primary-subtle text-primary d-flex align-items-center justify-content-center">
-                    <i class="fa-solid fa-file-circle-question fs-4"></i>
-                </div>
+<div class="container-fluid px-3 px-md-4 py-3">
+    <div class="mcq-assessment-wrapper">
+        {{-- Quiz Header Card --}}
+        <div class="mcq-assessment-header">
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
                 <div>
-                    <h5 class="fw-bold text-dark mb-1">Question Overview</h5>
+                    <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+                        <span class="mcq-badge-category">
+                            <i class="fa-solid fa-shapes"></i>
+                            {{ $userMcqView->first()->category->category_name ?? 'Quiz Category' }}
+                        </span>
+                        <span class="badge bg-light text-secondary border px-3 py-2 rounded-pill">
+                            <i class="fa-solid fa-circle-question text-primary me-1"></i>
+                            {{ $userMcqView->count() }} Questions
+                        </span>
+                    </div>
+                    <h2 class="mcq-quiz-title">{{ $userMcqView->first()->quiz->Quiz_Name ?? 'MCQ Assessment' }}</h2>
                     <p class="text-muted small mb-0">
-                        MCQ information and answer details
+                        <i class="fa-solid fa-info-circle me-1 text-primary"></i>
+                        Select your preferred option for each question and submit when completed.
                     </p>
                 </div>
             </div>
         </div>
-        @foreach($userMcqView as $McqData)
-        <div class="card-body p-4 p-md-5">
-            <div class="mcq-section-heading mb-3">
-                <h6 class="fw-bold text-uppercase text-secondary small mb-0">
-                    <i class="fa-solid fa-circle-info me-2 text-primary"></i>
-                    Quiz Information
-                </h6>
+        @if($userMcqView->isEmpty())
+        {{-- Empty State --}}
+        <div class="mcq-empty-container">
+            <div class="mcq-empty-icon">
+                <i class="fa-solid fa-folder-open"></i>
             </div>
-            <div class="row g-3 mb-5">
-                <div class="col-12 col-md-6">
-                    <div class="mcq-info-box border rounded-3 p-3 h-100">
-                        <label class="text-muted small fw-semibold mb-2">
-                            Category Name
-                        </label>
-                        <div class="d-flex align-items-start gap-2">
-                            <i class="fa-solid fa-tag text-primary mt-1"></i>
-                            <span class="fw-semibold text-dark mcq-break-text">
-                                {{ $McqData->category->category_name ?? 'N/A' }}
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="mcq-info-box border rounded-3 p-3 h-100">
-                        <label class="text-muted small fw-semibold mb-2">
-                            Quiz Name
-                        </label>
-                        <div class="d-flex align-items-start gap-2">
-                            <i class="fa-solid fa-book-open text-primary mt-1"></i>
-                            <span class="fw-semibold text-dark mcq-break-text">
-                                {{ $McqData->quiz->Quiz_Name ?? 'N/A' }}
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="d-flex align-items-center gap-2 mb-3">
-                <span class="mcq-question-label">{{$loop->index + 1}}</span>
-                <h5 class="fw-bold text-dark mb-0">Question Details</h5>
-            </div>
-            <div class="mcq-question-box border rounded-4 p-4 mb-5">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-primary small fw-bold text-uppercase">
-                        Question
-                    </span>
-                    <i class="fa-solid fa-quote-right text-primary mcq-quote-icon"></i>
-                </div>
-                <div class="mcq-question-text text-dark fw-semibold">{{ $McqData->Question_Name ?? 'N/A'  }}</div>
-            </div>
-            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
-                <h5 class="fw-bold text-dark mb-0">
-                    <i class="fa-solid fa-list-ul text-primary me-2"></i>
-                    Answer Options
-                </h5>
-                <span class="badge bg-light text-secondary border px-3 py-2">
-                    <i class="fa-solid fa-list-check me-1"></i>
-                    4 Options
-                </span>
-            </div>
-            <div class="row g-3 mb-5">
-                <div class="col-12 col-md-6">
-                    <div class="mcq-option-card border rounded-3 p-3 h-100 d-flex align-items-start gap-3">
-                        <span class="mcq-option-letter">A</span>
-                        <div class="mcq-option-text text-dark">{{ $McqData->optionA ?? 'N/A'  }}</div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="mcq-option-card border rounded-3 p-3 h-100 d-flex align-items-start gap-3">
-                        <span class="mcq-option-letter">B</span>
-                        <div class="mcq-option-text text-dark">{{ $McqData->optionB ?? 'N/A'  }}</div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="mcq-option-card border rounded-3 p-3 h-100 d-flex align-items-start gap-3">
-                        <span class="mcq-option-letter">C</span>
-                        <div class="mcq-option-text text-dark">{{ $McqData->optionC ?? 'N/A' }}</div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="mcq-option-card border rounded-3 p-3 h-100 d-flex align-items-start gap-3">
-                        <span class="mcq-option-letter">D</span>
-                        <div class="mcq-option-text text-dark">{{ $McqData->optionD ?? 'N/A' }}</div>
-                    </div>
-                </div>
-            </div>
-            <!-- <div class="mcq-correct-answer border rounded-4 p-4">
-                <div class="d-flex flex-wrap align-items-start gap-3">
-                    <div class="mcq-correct-icon rounded-circle bg-success text-white d-flex align-items-center justify-content-center">
-                        <i class="fa-solid fa-check fs-5"></i>
-                    </div>
-                    <div class="flex-grow-1 mcq-answer-content">
-                        <div class="text-success fw-bold mb-2">
-                            Correct Answer
-                        </div>
-                        <div class="text-dark fw-semibold fs-5 mcq-break-text">
-                           OPTION " {{--{{ $McqData->correct_Answer }}--}} "
-                        </div>
-                        <small class="text-muted d-block mt-2">
-                            This is the answer marked as correct for this question.
-                        </small>
-                    </div>
-                    <span class="badge bg-success rounded-pill px-3 py-2">
-                        <i class="fa-solid fa-check-circle me-1"></i>
-                        Verified
-                    </span>
-                </div>
-            </div> -->
+            <h4 class="fw-bold text-dark mb-2">No Questions Available</h4>
+            <p class="text-muted mb-4">
+                There are currently no MCQs added to this quiz. Please check back later or explore other quizzes.
+            </p>
+            <a href="javascript:history.back()" class="btn btn-primary px-4 py-2 rounded-3 fw-semibold">
+                <i class="fa-solid fa-arrow-left me-2"></i>
+                Back to Quizzes
+            </a>
         </div>
-        @endforeach
+        @else
+        {{-- Questions Container --}}
+        <form id="quizForm" action="#" method="POST">
+            @csrf
+            @foreach($userMcqView as $mcq)
+            <div class="mcq-question-card" id="">
+                <div class="mcq-question-header">
+                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                        <span class="mcq-q-num-badge">
+                            <i class="fa-solid fa-list-ol"></i>
+                            Question {{ $loop->index + 1 }} of {{ $userMcqView->count() }}
+                        </span>
+                        <span class="badge bg-light text-secondary border px-3 py-2 rounded-pill small">
+                            Single Choice
+                        </span>
+                    </div>
+                    <h4 class="mcq-q-title">{{ $mcq->Question_Name }}</h4>
+                </div>
+                <div class="mcq-question-body">
+                    <div class="mcq-options-grid">
+                        {{-- Option A --}}
+                        <label class="mcq-option-label" for="">
+                            <input type="radio" class="mcq-option-radio" name="optionA" id="optionA">
+                            <span class="mcq-opt-letter">A</span>
+                            <span class="mcq-opt-text">{{ $mcq->optionA }}</span>
+                            <span class="mcq-opt-indicator"></span>
+                        </label>
+                        {{-- Option B --}}
+                        <label class="mcq-option-label" for="">
+                            <input type="radio" class="mcq-option-radio" name="optionA" id="optionA">
+                            <span class="mcq-opt-letter">B</span>
+                            <span class="mcq-opt-text">{{ $mcq->optionB }}</span>
+                            <span class="mcq-opt-indicator"></span>
+                        </label>
+                        {{-- Option C --}}
+                        <label class="mcq-option-label" for="">
+                            <input type="radio" class="mcq-option-radio" name="optionA" id="optionA">
+                            <span class="mcq-opt-letter">C</span>
+                            <span class="mcq-opt-text">{{ $mcq->optionC }}</span>
+                            <span class="mcq-opt-indicator"></span>
+                        </label>
+                        {{-- Option D --}}
+                        <label class="mcq-option-label" for="">
+                            <input type="radio" class="mcq-option-radio" name="optionA" id="optionA">
+                            <span class="mcq-opt-letter">D</span>
+                            <span class="mcq-opt-text">{{ $mcq->optionD }}</span>
+                            <span class="mcq-opt-indicator"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+            {{-- Bottom Navigation Controls (Submit and Next) --}}
+            <div class="mcq-controls-footer">
+                <div>
+                    <a href="#" class="mcq-btn-action mcq-btn-prev">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>Previous</span>
+                    </a>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <button type="button" class="mcq-btn-action mcq-btn-next">
+                        <span>Next</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    <button type="submit" class="mcq-btn-action mcq-btn-submit">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        <span>Submit</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+        @endif
     </div>
 </div>
 @endsection

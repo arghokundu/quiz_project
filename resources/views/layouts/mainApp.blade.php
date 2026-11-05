@@ -29,6 +29,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/mcq/mcq_view.css') }}">
 
     <link rel="stylesheet" href="{{ asset('assets/css/userDashb/userDas.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets/css/userDashb/userMcqAssessment.css') }}">
 </head>
 
 <body>
