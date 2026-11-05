@@ -57,3 +57,5 @@ Route::get('/user/cat/list',[userCatController::class,'userCatAllList']);
 Route::get('/user/quiz/list/view/{catId}',[userQuizController::class,'userQuizView']);
 
 Route::get('/user/mcq/specific/{quizId}',[userMcqViewController::class,'mcqViewList']);
+
+Route::post('/submit/next/{mcqId}',[userMcqViewController::class,'submitAndNext']);

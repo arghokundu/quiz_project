@@ -9,14 +9,14 @@
                     <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
                         <span class="mcq-badge-category">
                             <i class="fa-solid fa-shapes"></i>
-                            {{ $userMcqView->first()->category->category_name ?? 'Quiz Category' }}
+                            {{ $userMcqView->category->category_name ?? 'Quiz Category' }}
                         </span>
                         <span class="badge bg-light text-secondary border px-3 py-2 rounded-pill">
                             <i class="fa-solid fa-circle-question text-primary me-1"></i>
-                            {{ $userMcqView->count() }} Questions
+                            {{ $currentQuiz['totalMcq'] }} Questions
                         </span>
                     </div>
-                    <h2 class="mcq-quiz-title">{{ $userMcqView->first()->quiz->Quiz_Name ?? 'MCQ Assessment' }}</h2>
+                    <h2 class="mcq-quiz-title">{{ $userMcqView->quiz->Quiz_Name ?? 'MCQ Assessment' }}</h2>
                     <p class="text-muted small mb-0">
                         <i class="fa-solid fa-info-circle me-1 text-primary"></i>
                         Select your preferred option for each question and submit when completed.
@@ -24,7 +24,7 @@
                 </div>
             </div>
         </div>
-        @if($userMcqView->isEmpty())
+        @if(!$userMcqView)
         {{-- Empty State --}}
         <div class="mcq-empty-container">
             <div class="mcq-empty-icon">
@@ -40,22 +40,20 @@
             </a>
         </div>
         @else
-        {{-- Questions Container --}}
-        <form id="quizForm" action="#" method="POST">
+        <form id="mcqAssignmentForm" action="/submit/next/{{$userMcqView->mcq_id}}" method="POST">
             @csrf
-            @foreach($userMcqView as $mcq)
             <div class="mcq-question-card" id="">
                 <div class="mcq-question-header">
                     <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
                         <span class="mcq-q-num-badge">
                             <i class="fa-solid fa-list-ol"></i>
-                            Question {{ $loop->index + 1 }} of {{ $userMcqView->count() }}
+                            Question {{ $currentQuiz['currentMcq'] }} of {{ $currentQuiz['totalMcq'] }}
                         </span>
                         <span class="badge bg-light text-secondary border px-3 py-2 rounded-pill small">
                             Single Choice
                         </span>
                     </div>
-                    <h4 class="mcq-q-title">{{ $mcq->Question_Name }}</h4>
+                    <h4 class="mcq-q-title">{{ $userMcqView->Question_Name }}</h4>
                 </div>
                 <div class="mcq-question-body">
                     <div class="mcq-options-grid">
@@ -63,51 +61,49 @@
                         <label class="mcq-option-label" for="">
                             <input type="radio" class="mcq-option-radio" name="optionA" id="optionA">
                             <span class="mcq-opt-letter">A</span>
-                            <span class="mcq-opt-text">{{ $mcq->optionA }}</span>
+                            <span class="mcq-opt-text">{{ $userMcqView->optionA }}</span>
                             <span class="mcq-opt-indicator"></span>
                         </label>
                         {{-- Option B --}}
                         <label class="mcq-option-label" for="">
                             <input type="radio" class="mcq-option-radio" name="optionA" id="optionA">
                             <span class="mcq-opt-letter">B</span>
-                            <span class="mcq-opt-text">{{ $mcq->optionB }}</span>
+                            <span class="mcq-opt-text">{{ $userMcqView->optionB }}</span>
                             <span class="mcq-opt-indicator"></span>
                         </label>
                         {{-- Option C --}}
                         <label class="mcq-option-label" for="">
                             <input type="radio" class="mcq-option-radio" name="optionA" id="optionA">
                             <span class="mcq-opt-letter">C</span>
-                            <span class="mcq-opt-text">{{ $mcq->optionC }}</span>
+                            <span class="mcq-opt-text">{{ $userMcqView->optionC }}</span>
                             <span class="mcq-opt-indicator"></span>
                         </label>
                         {{-- Option D --}}
                         <label class="mcq-option-label" for="">
                             <input type="radio" class="mcq-option-radio" name="optionA" id="optionA">
                             <span class="mcq-opt-letter">D</span>
-                            <span class="mcq-opt-text">{{ $mcq->optionD }}</span>
+                            <span class="mcq-opt-text">{{ $userMcqView->optionD }}</span>
                             <span class="mcq-opt-indicator"></span>
                         </label>
                     </div>
                 </div>
             </div>
-            @endforeach
-            {{-- Bottom Navigation Controls (Submit and Next) --}}
+            {{-- Navigation Buttons --}}
             <div class="mcq-controls-footer">
-                <div>
-                    <a href="#" class="mcq-btn-action mcq-btn-prev">
-                        <i class="fa-solid fa-arrow-left"></i>
-                        <span>Previous</span>
-                    </a>
-                </div>
                 <div class="d-flex align-items-center gap-3">
-                    <button type="button" class="mcq-btn-action mcq-btn-next">
-                        <span>Next</span>
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                    <button type="submit" class="mcq-btn-action mcq-btn-submit">
-                        <i class="fa-solid fa-paper-plane"></i>
-                        <span>Submit</span>
-                    </button>
+                    @if($currentQuiz['currentMcq'] < $currentQuiz['totalMcq']) 
+                        {{-- Next Button --}} 
+                        <button type="submit" name="action" value="next" class="mcq-btn-action mcq-btn-next">
+                            <span>Next</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                        @else
+                        {{-- Final Submit Button --}}
+                        <button type="submit" name="action" value="finish" class="mcq-btn-action mcq-btn-submit">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Submit Quiz</span>
+                        </button>
+                    @endif
                 </div>
             </div>
         </form>
