@@ -58,29 +58,29 @@
                 <div class="mcq-question-body">
                     <div class="mcq-options-grid">
                         {{-- Option A --}}
-                        <label class="mcq-option-label" for="">
-                            <input type="radio" class="mcq-option-radio" name="optionA" id="optionA">
+                        <label class="mcq-option-label" for="optionA">
+                            <input type="radio" class="mcq-option-radio" name="userAnswerOption" id="optionA">
                             <span class="mcq-opt-letter">A</span>
                             <span class="mcq-opt-text">{{ $userMcqView->optionA }}</span>
                             <span class="mcq-opt-indicator"></span>
                         </label>
                         {{-- Option B --}}
-                        <label class="mcq-option-label" for="">
-                            <input type="radio" class="mcq-option-radio" name="optionA" id="optionA">
+                        <label class="mcq-option-label" for="optionB">
+                            <input type="radio" class="mcq-option-radio" name="userAnswerOption" id="optionB">
                             <span class="mcq-opt-letter">B</span>
                             <span class="mcq-opt-text">{{ $userMcqView->optionB }}</span>
                             <span class="mcq-opt-indicator"></span>
                         </label>
                         {{-- Option C --}}
-                        <label class="mcq-option-label" for="">
-                            <input type="radio" class="mcq-option-radio" name="optionA" id="optionA">
+                        <label class="mcq-option-label" for="optionC">
+                            <input type="radio" class="mcq-option-radio" name="userAnswerOption" id="optionC">
                             <span class="mcq-opt-letter">C</span>
                             <span class="mcq-opt-text">{{ $userMcqView->optionC }}</span>
                             <span class="mcq-opt-indicator"></span>
                         </label>
                         {{-- Option D --}}
-                        <label class="mcq-option-label" for="">
-                            <input type="radio" class="mcq-option-radio" name="optionA" id="optionA">
+                        <label class="mcq-option-label" for="optionD">
+                            <input type="radio" class="mcq-option-radio" name="userAnswerOption" id="optionD">
                             <span class="mcq-opt-letter">D</span>
                             <span class="mcq-opt-text">{{ $userMcqView->optionD }}</span>
                             <span class="mcq-opt-indicator"></span>

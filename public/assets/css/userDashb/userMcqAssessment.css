@@ -603,3 +603,135 @@
     }
 }
 
+
+/* ==========================================
+   MCQ NAVIGATION FOOTER
+========================================== */
+
+.mcq-controls-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 20px 24px;
+    margin-top: 25px;
+    background: #ffffff;
+    border-top: 1px solid #e9edf4;
+    border-radius: 0 0 14px 14px;
+}
+
+/* Navigation Information */
+
+.mcq-navigation-info {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #7b8798;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.mcq-navigation-info i {
+    color: #4169d8;
+    font-size: 16px;
+}
+
+/* Navigation Buttons */
+
+.mcq-navigation-buttons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.mcq-btn-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 46px;
+    padding: 0 22px;
+    border: none;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 650;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+/* Previous Button */
+
+.mcq-btn-previous {
+    background: #f1f4f9;
+    color: #475569;
+    border: 1px solid #e1e7f0;
+}
+
+.mcq-btn-previous:hover {
+    background: #e5eaf2;
+    color: #263449;
+    transform: translateY(-2px);
+}
+
+/* Next Button */
+
+.mcq-btn-next {
+    color: #ffffff;
+    background: linear-gradient(135deg, #4267d5, #3152b5);
+    box-shadow: 0 4px 12px rgba(49, 82, 181, 0.18);
+}
+
+.mcq-btn-next:hover {
+    background: linear-gradient(135deg, #3152b5, #244399);
+    box-shadow: 0 6px 16px rgba(49, 82, 181, 0.25);
+    transform: translateY(-2px);
+    color: #ffffff;
+}
+
+/* Submit Button */
+
+.mcq-btn-submit {
+    color: #ffffff;
+    background: linear-gradient(135deg, #159957, #087443);
+    box-shadow: 0 4px 12px rgba(21, 153, 87, 0.2);
+}
+
+.mcq-btn-submit:hover {
+    background: linear-gradient(135deg, #087443, #056239);
+    box-shadow: 0 6px 16px rgba(21, 153, 87, 0.25);
+    transform: translateY(-2px);
+    color: #ffffff;
+}
+
+.mcq-btn-action:active {
+    transform: scale(0.97);
+}
+
+/* Mobile Responsive */
+
+@media (max-width: 576px) {
+
+    .mcq-controls-footer {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 16px;
+    }
+
+    .mcq-navigation-info {
+        justify-content: center;
+        padding-bottom: 5px;
+    }
+
+    .mcq-navigation-buttons {
+        width: 100%;
+        gap: 9px;
+    }
+
+    .mcq-btn-action {
+        flex: 1;
+        padding: 0 12px;
+        min-height: 44px;
+        font-size: 13px;
+    }
+}
