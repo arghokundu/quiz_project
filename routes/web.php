@@ -11,6 +11,7 @@ use App\Http\Controllers\User\userController;
 use App\Http\Controllers\User\userCatController;
 use App\Http\Controllers\User\userQuizController;
 use App\Http\Controllers\User\userMcqViewController;
+use App\Http\Controllers\User\UserAuth\userAuthController;
 
 Route::get('/',[userController::class,'dashBoard']);
 
@@ -52,6 +53,9 @@ Route::middleware(['adminAuth'])->group(function()
 });
 
 // ==========================user here========================
+Route::get('/user/reg/form',[userAuthController::class,'userRegForm']);
+Route::get('/user/login/form',[userAuthController::class,'userLogForm']);
+
 Route::get('/user/cat/list',[userCatController::class,'userCatAllList']);
 
 Route::get('/user/quiz/list/view/{catId}',[userQuizController::class,'userQuizView']);
