@@ -83,7 +83,7 @@
                                 <i class="fa-regular fa-envelope"></i>
                                 <input type="email" name="user_email" class="form-control" placeholder="Enter your email" required>
                             </div>
-                            @error('email')
+                            @error('user_email')
                             <small class="text-danger d-block mt-1">
                                 {{ $message }}
                             </small>
@@ -100,7 +100,7 @@
                                     placeholder="Enter your password" required>
                                 <i class="fa-regular fa-eye password-toggle" data-target="loginPassword"></i>
                             </div>
-                            @error('password')
+                            @error('User_password')
                             <small class="text-danger d-block mt-1">
                                 {{ $message }}
                             </small>

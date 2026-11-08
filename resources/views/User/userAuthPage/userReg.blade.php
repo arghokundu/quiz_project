@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('assets/css/userAuthen/authUser.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <div class="auth-page">
@@ -66,7 +67,7 @@
                         </p>
                     </div>
                     <!-- REGISTRATION FORM -->
-                    <form action="#" method="POST">
+                    <form action="/store/user/register/data" method="POST">
                         @csrf
                         <!-- FULL NAME -->
                         <div class="mb-3">
@@ -75,11 +76,19 @@
                                 <i class="fa-regular fa-user"></i>
                                 <input type="text" name="User_Name" class="form-control" placeholder="Enter your full name" required>
                             </div>
-                            @error('name')
+                            @error('User_Name')
                             <small class="text-danger d-block mt-1">
+                                <i class="fa-solid fa-circle-exclamation me-1"></i>
                                 {{ $message }}
                             </small>
                             @enderror
+                            <!-- Display message -->
+                            @if(session('error'))
+                            <p class="text-danger fw-semibold mt-2">
+                                <i class="fa-solid fa-circle-exclamation me-1"></i>
+                                {{ session('error') }}
+                            </p>
+                            @endif
                         </div>
                         <!-- EMAIL -->
                         <div class="mb-3">
@@ -88,11 +97,19 @@
                                 <i class="fa-regular fa-envelope"></i>
                                 <input type="email" name="User_Email" class="form-control" placeholder="Enter your email" required>
                             </div>
-                            @error('email')
+                            @error('User_Email')
                             <small class="text-danger d-block mt-1">
+                                <i class="fa-solid fa-circle-exclamation me-1"></i>
                                 {{ $message }}
                             </small>
                             @enderror
+                            <!-- Display message -->
+                            @if(session('error'))
+                            <p class="text-danger fw-semibold mt-2">
+                                <i class="fa-solid fa-circle-exclamation me-1"></i>
+                                {{ session('error') }}
+                            </p>
+                            @endif
                         </div>
                         <!-- PASSWORD -->
                         <div class="mb-3">
@@ -103,18 +120,26 @@
                                     placeholder="Create a password"  required>
                                 <i class="fa-regular fa-eye password-toggle" data-target="registerPassword"></i>
                             </div>
-                            @error('password')
+                            @error('user_Password')
                             <small class="text-danger d-block mt-1">
+                                <i class="fa-solid fa-circle-exclamation me-1"></i>
                                 {{ $message }}
                             </small>
                             @enderror
+                            <!-- Display message -->
+                            @if(session('error'))
+                            <p class="text-danger fw-semibold mt-2">
+                                <i class="fa-solid fa-circle-exclamation me-1"></i>
+                                {{ session('error') }}
+                            </p>
+                            @endif
                         </div>
                         <!-- CONFIRM PASSWORD -->
                         <div class="mb-4">
                             <label class="form-label">Confirm Password</label>
                             <div class="auth-input-group">
                                 <i class="fa-solid fa-shield-halved"></i>
-                                <input type="password" name="password_confirmation" id="confirmPassword"
+                                <input type="password" name="user_Password_confirmation" id="confirmPassword"
                                     class="form-control" placeholder="Confirm your password" autocomplete="new-password"
                                     required>
                                 <i class="fa-regular fa-eye password-toggle" data-target="confirmPassword"></i>

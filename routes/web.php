@@ -54,6 +54,7 @@ Route::middleware(['adminAuth'])->group(function()
 
 // ==========================user here========================
 Route::get('/user/reg/form',[userAuthController::class,'userRegForm']);
+Route::post('/store/user/register/data',[userAuthController::class,'storeUserRegData']);
 Route::get('/user/login/form',[userAuthController::class,'userLogForm']);
 
 Route::get('/user/cat/list',[userCatController::class,'userCatAllList']);
