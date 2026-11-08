@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('assets/css/userAuthen/authUser.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <div class="auth-page">
@@ -72,7 +73,7 @@
                         </p>
                     </div>
                     <!-- LOGIN FORM -->
-                    <form action="#" method="POST">
+                    <form action="/user/login" method="POST">
                         @csrf
                         <!-- EMAIL ADDRESS -->
                         <div class="mb-4">
@@ -88,6 +89,13 @@
                                 {{ $message }}
                             </small>
                             @enderror
+                            <!-- Display message -->
+                            @if(session('error'))
+                            <p class="text-danger fw-semibold mt-2">
+                                <i class="fa-solid fa-circle-exclamation me-1"></i>
+                                {{ session('error') }}
+                            </p>
+                            @endif
                         </div>
                         <!-- PASSWORD -->
                         <div class="mb-3">
@@ -105,6 +113,13 @@
                                 {{ $message }}
                             </small>
                             @enderror
+                            <!-- Display message -->
+                            <!-- {{--@if(session('error'))
+                            <p class="text-danger fw-semibold mt-2">
+                                <i class="fa-solid fa-circle-exclamation me-1"></i>
+                                {{ session('error') }}
+                            </p>
+                            @endif--}} -->
                         </div>
                         <!-- FORGOT PASSWORD -->
                         <div class="text-end mb-4">

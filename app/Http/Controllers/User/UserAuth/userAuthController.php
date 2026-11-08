@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use App\Models\UserAuthM\userAuthModel;
 use App\Http\Requests\User\RegRequest;
+use App\Http\Requests\User\LogRequest;
 
 class userAuthController extends Controller
 {
@@ -55,5 +56,34 @@ class userAuthController extends Controller
     {
         return view('User.userAuthPage.userLogin');
     }
-    
+    public function userLogin(LogRequest $logR)
+    {
+        try
+        {
+            $userReqEmail=$logR->user_email;
+            $userReqPassword=$logR->User_password;
+            $checkUserlogExistsOrNot=userAuthModel::select('userEmail','user_id','userPassword','Active_status','userName')
+                ->where('userEmail','=',$userReqEmail)->first();
+            if(!$checkUserlogExistsOrNot || !Hash::check($userReqPassword,$checkUserlogExistsOrNot->userPassword))
+            {
+                return back()->with('error','Email Not Exists Please Register First');
+            }
+            else
+            {
+                $logR->session()->regenerate();
+                session([
+                    'userId'=>$checkUserlogExistsOrNot->user_id,
+                    'userEmailId'=>$checkUserlogExistsOrNot->userEmail,
+                    'usersName'=>$checkUserlogExistsOrNot->userName,
+                    'userActiveStatus'=>$checkUserlogExistsOrNot->Active_status,
+                ]);
+                return redirect('/')->with('success','user Successfully Login');
+            }
+        }
+        catch(\Exception $e)
+        {
+            return back()->with('error',$e->getMessage());
+        }
+        
+    }
 }
