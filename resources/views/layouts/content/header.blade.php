@@ -141,6 +141,13 @@
                         <span class="user-name">
                             {{session('adminRole','Guest')}}
                         </span>
+                        @elseif(session()->has('userId'))
+                        <span class="user-name">
+                            {{session('usersName','User')}}
+                        </span>
+                        <span class="user-name">
+                            {{session('userEmailId','User')}}
+                        </span>
                         @else
                         <span class="user-role">Guest</span>
                         @endif
@@ -168,6 +175,7 @@
                         <hr class="dropdown-divider">
                     </li>
                     <li>
+                        @if(session()->has('adminId'))
                         <form action="/logout" method="POST">
                             @csrf
                             <button type="submit" class="dropdown-item text-danger">
@@ -175,6 +183,15 @@
                                 Sign Out
                             </button>
                         </form>
+                        @elseif(session()->has('userId'))
+                        <form action="/user/logout" method="POST">
+                            @csrf
+                            <button type="submit" class="dropdown-item text-danger">
+                                <i class="bi bi-box-arrow-right"></i>
+                                Sign Out
+                            </button>
+                        </form>
+                        @endif
                     </li>
                 </ul>
             </div>

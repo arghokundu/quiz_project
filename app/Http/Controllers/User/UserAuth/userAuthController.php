@@ -84,6 +84,17 @@ class userAuthController extends Controller
         {
             return back()->with('error',$e->getMessage());
         }
-        
+    }
+    public function userLogout(Request $logR)
+    {
+        $logR->session()->forget([
+            'userId',
+            'userEmailId',
+            'usersName',
+            'userActiveStatus'
+        ]);
+        $logR->session()->invalidate();
+        $logR->session()->regenerateToken();
+        return redirect('/user/login/form');
     }
 }

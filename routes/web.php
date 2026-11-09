@@ -57,6 +57,7 @@ Route::get('/user/reg/form',[userAuthController::class,'userRegForm']);
 Route::post('/store/user/register/data',[userAuthController::class,'storeUserRegData']);
 Route::get('/user/login/form',[userAuthController::class,'userLogForm']);
 Route::post('/user/login',[userAuthController::class,'userLogin']);
+Route::post('/user/logout',[userAuthController::class,'userLogout']);
 
 Route::get('/user/cat/list',[userCatController::class,'userCatAllList']);
 
