@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\adminController;
 use App\Http\Middleware\Admin\adminLogOrNot;
+use App\Http\Middleware\User\userLogOrNot;
 use App\Http\Controllers\Category\categoryController;
 use App\Http\Controllers\Quiz\quizController;
 use App\Http\Controllers\Mcq\mcqController;
@@ -13,15 +14,16 @@ use App\Http\Controllers\User\userQuizController;
 use App\Http\Controllers\User\userMcqViewController;
 use App\Http\Controllers\User\UserAuth\userAuthController;
 
+// ---------------everyone can see this dashboard-------------
 Route::get('/',[userController::class,'dashBoard']);
-
+// -----------------admin dashboard---------------
 Route::get('/admin/dashboard', [dashboardController::class, 'dashboard']);
 
+// --------------admin login logout-----------------
 Route::get('/login',[adminController::class,'loginPage']);
 Route::post('/loginEntry',[adminController::class,'loginAdmin']);
 
-
-
+// ---------------admin security middleware------------
 Route::middleware(['adminAuth'])->group(function()
 {
     Route::post('/logout',[adminController::class,'logoutAdmin']);
@@ -53,16 +55,23 @@ Route::middleware(['adminAuth'])->group(function()
 });
 
 // ==========================user here========================
+// ------------user register----------
 Route::get('/user/reg/form',[userAuthController::class,'userRegForm']);
 Route::post('/store/user/register/data',[userAuthController::class,'storeUserRegData']);
+// ---------------user login-----------
 Route::get('/user/login/form',[userAuthController::class,'userLogForm']);
 Route::post('/user/login',[userAuthController::class,'userLogin']);
-Route::post('/user/logout',[userAuthController::class,'userLogout']);
 
-Route::get('/user/cat/list',[userCatController::class,'userCatAllList']);
+// --------------------user security middleware-------------------
+Route::middleware(['UserLogOrNotCheck'])->group(function(){
 
-Route::get('/user/quiz/list/view/{catId}',[userQuizController::class,'userQuizView']);
-
-Route::get('/user/mcq/specific/{quizId}',[userMcqViewController::class,'mcqViewList']);
-
-Route::post('/submit/next/{mcqId}',[userMcqViewController::class,'submitAndNext']);
+    Route::post('/user/logout',[userAuthController::class,'userLogout']);
+    
+    Route::get('/user/cat/list',[userCatController::class,'userCatAllList']);
+    
+    Route::get('/user/quiz/list/view/{catId}',[userQuizController::class,'userQuizView']);
+    
+    Route::get('/user/mcq/specific/{quizId}',[userMcqViewController::class,'mcqViewList']);
+    
+    Route::post('/submit/next/{mcqId}',[userMcqViewController::class,'submitAndNext']);
+});
