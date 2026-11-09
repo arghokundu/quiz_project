@@ -13,7 +13,12 @@
                     <span>Quiz Management System </span>
                 </div>
                 <h1 class="hero-title">
-                    Welcome back, User
+                    Welcome back, 
+                    @if(session()->has('usersName'))
+                        {{session('usersName','User')}}
+                    @else
+                        User
+                    @endif
                 </h1>
                 <p class="hero-subtitle">
                     Here is what's happening across your quiz ecosystem today. Monitor your quizzes, category
