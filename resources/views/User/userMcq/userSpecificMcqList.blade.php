@@ -56,31 +56,49 @@
                     <h4 class="mcq-q-title">{{ $userMcqView->Question_Name }}</h4>
                 </div>
                 <div class="mcq-question-body">
+                    @if(session('error'))
+                    <p class="text-danger fw-semibold mt-2">
+                        <i class="fa-solid fa-circle-exclamation me-1"></i>
+                        {{ session('error') }}
+                    </p>
+                    @endif
+                    <div>
+                    @error('userAnswerOption')
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                       {{ $message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @enderror
+                    </div>
                     <div class="mcq-options-grid">
                         {{-- Option A --}}
                         <label class="mcq-option-label" for="optionA">
-                            <input type="radio" class="mcq-option-radio" name="userAnswerOption" id="optionA">
+                            <input type="radio" class="mcq-option-radio" name="userAnswerOption" id="optionA" value="A"
+                                {{ old('userAnswerOption') == 'A' ? 'checked' : '' }}>
                             <span class="mcq-opt-letter">A</span>
                             <span class="mcq-opt-text">{{ $userMcqView->optionA }}</span>
                             <span class="mcq-opt-indicator"></span>
                         </label>
                         {{-- Option B --}}
                         <label class="mcq-option-label" for="optionB">
-                            <input type="radio" class="mcq-option-radio" name="userAnswerOption" id="optionB">
+                            <input type="radio" class="mcq-option-radio" name="userAnswerOption" id="optionB" value="B"
+                                {{ old('userAnswerOption') == 'B' ? 'checked' : '' }}>
                             <span class="mcq-opt-letter">B</span>
                             <span class="mcq-opt-text">{{ $userMcqView->optionB }}</span>
                             <span class="mcq-opt-indicator"></span>
                         </label>
                         {{-- Option C --}}
                         <label class="mcq-option-label" for="optionC">
-                            <input type="radio" class="mcq-option-radio" name="userAnswerOption" id="optionC">
+                            <input type="radio" class="mcq-option-radio" name="userAnswerOption" id="optionC" value="C"
+                             {{ old('userAnswerOption') == 'C' ? 'checked' : '' }}>
                             <span class="mcq-opt-letter">C</span>
                             <span class="mcq-opt-text">{{ $userMcqView->optionC }}</span>
                             <span class="mcq-opt-indicator"></span>
                         </label>
                         {{-- Option D --}}
                         <label class="mcq-option-label" for="optionD">
-                            <input type="radio" class="mcq-option-radio" name="userAnswerOption" id="optionD">
+                            <input type="radio" class="mcq-option-radio" name="userAnswerOption" id="optionD" value="D"
+                             {{ old('userAnswerOption') == 'D' ? 'checked' : '' }}>
                             <span class="mcq-opt-letter">D</span>
                             <span class="mcq-opt-text">{{ $userMcqView->optionD }}</span>
                             <span class="mcq-opt-indicator"></span>
