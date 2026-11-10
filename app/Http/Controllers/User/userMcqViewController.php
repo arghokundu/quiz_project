@@ -10,6 +10,7 @@ use App\Models\Quiz\QuizModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\Mcq\McqModel;
+use App\Models\User\userRecordModel;
 
 class userMcqViewController extends Controller
 {
@@ -32,16 +33,39 @@ class userMcqViewController extends Controller
             ->where('quiz_id_fk', $quizId)
             ->orderBy('mcq_id', 'asc')
             ->first();
-
-        // Store quiz information in session
-        $currentQuiz = [
-            'totalMcq' => $totalMcq,
-            'currentMcq' => 1,
-            'quizId' => $quizId,
-            'currentMcqId' => $userMcqView->mcq_id
-        ];
-        Session::put('currentQuiz', $currentQuiz);
-        return view('User.userMcq.userSpecificMcqList',compact('userMcqView', 'currentQuiz'));
+        
+        //===================user Record details save ========== 
+        DB::beginTransaction();
+        try
+        {
+            $userRecords= new userRecordModel();
+            $userRecords->quiz_id_fk=$quizId;
+            $userRecords->user_id_fk=session('userId');
+            $userRecords->status=1;
+            $saveUserRecords=$userRecords->save();
+            if($saveUserRecords)
+            {
+                DB::commit();
+                // Store quiz information in session
+                $currentQuiz = [
+                    'totalMcq' => $totalMcq,
+                    'currentMcq' => 1,
+                    'quizId' => $quizId,
+                    'currentMcqId' => $userMcqView->mcq_id
+                ];
+                Session::put('currentQuiz', $currentQuiz);
+                return view('User.userMcq.userSpecificMcqList',compact('userMcqView', 'currentQuiz'));
+            }
+            else
+            {
+                return back()->with('error','No record save');
+            }
+        }
+        catch(\Exception $e)
+        {
+            DB::rollback();
+            return back()->with('error',$e->getMessage());
+        }
     }
 
     // Submit Answer and Fetch Next Question
