@@ -69,7 +69,25 @@ class userMcqViewController extends Controller
             return back()->with('error',$e->getMessage());
         }
     }
-
+    // Display Next Question
+    public function showQuestion($mcqId)
+    {
+        $currentQuiz = Session::get('currentQuiz');
+        if (!$currentQuiz) 
+        {
+            return redirect('/')->with('error', 'Quiz session expired.');
+        }
+        $userMcqView = McqModel::with('quiz', 'category')
+            ->select('mcq_id','Question_Name','optionA','optionB','optionC','optionD','quiz_id_fk','cat_id_fk','admin_id_fk')
+            ->where('mcq_id', $mcqId)
+            ->where('quiz_id_fk', $currentQuiz['quizId'])
+            ->first();
+        if (!$userMcqView) 
+        {
+            return redirect('/')->with('error', 'Invalid question.');
+        }
+        return view('User.userMcq.userSpecificMcqList',compact('userMcqView', 'currentQuiz'));
+    }
     // Submit Answer and Fetch Next Question
     public function submitAndNext(Request $mcqUserReq,$mcqId)
     {
@@ -127,7 +145,8 @@ class userMcqViewController extends Controller
                     $currentQuiz['currentMcq']++;
                     $currentQuiz['currentMcqId'] = $userMcqView->mcq_id;
                     Session::put('currentQuiz', $currentQuiz);
-                    return view('User.userMcq.userSpecificMcqList',compact('userMcqView', 'currentQuiz'));
+                    // return view('User.userMcq.userSpecificMcqList',compact('userMcqView', 'currentQuiz'));
+                    return redirect('/user/mcq/question/' . $userMcqView->mcq_id);
                 }
                 else
                 {

@@ -72,6 +72,9 @@ Route::middleware(['UserLogOrNotCheck'])->group(function(){
     Route::get('/user/quiz/list/view/{catId}',[userQuizController::class,'userQuizView']);
     
     Route::get('/user/mcq/specific/{quizId}',[userMcqViewController::class,'mcqViewList']);
-    
+
+    // Display next question
+    Route::get('/user/mcq/question/{mcqId}', [userMcqViewController::class, 'showQuestion']);
+    // submit and save answer and next question 
     Route::post('/submit/next/{mcqId}',[userMcqViewController::class,'submitAndNext']);
 });
