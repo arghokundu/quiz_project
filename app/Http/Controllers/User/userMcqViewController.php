@@ -123,37 +123,49 @@ class userMcqViewController extends Controller
         DB::beginTransaction();
         try
         {
-            $attempts=new userAttemptModel();  
-            $attempts->userSelect_Ans=$mcqUserReq->userAnswerOption;
-            $attempts->user_id_fk=session('userId');
-            $attempts->userRecord_id_fk=$currentQuiz['userRecordId']; 
-            $attempts->mcq_id_fk=$mcqId; 
-            if($mcqUserReq->userAnswerOption == $currentMcqView->correct_Answer )
+            // -----duplicate check here----
+            $isExists=userAttemptModel::where('userRecord_id_fk','=',$currentQuiz['userRecordId'])
+                ->where('mcq_id_fk','=',$mcqId)->count();
+            if($isExists<1) // here also if suplicate not check not use this 
             {
-                $attempts->correct_ans=1;
-            }
-            else
-            {
-                $attempts->correct_ans=0;
-            }
-            $savedAttemptsMcqAns=$attempts->save();
-            if($savedAttemptsMcqAns)
-            {
-                DB::commit();
-                // If next question exists
-                if ($userMcqView) {
-                    $currentQuiz['currentMcq']++;
-                    $currentQuiz['currentMcqId'] = $userMcqView->mcq_id;
-                    Session::put('currentQuiz', $currentQuiz);
-                    // return view('User.userMcq.userSpecificMcqList',compact('userMcqView', 'currentQuiz'));
-                    return redirect('/user/mcq/question/' . $userMcqView->mcq_id);
+                $attempts=new userAttemptModel();  
+                $attempts->userSelect_Ans=$mcqUserReq->userAnswerOption;
+                $attempts->user_id_fk=session('userId');
+                $attempts->userRecord_id_fk=$currentQuiz['userRecordId']; 
+                $attempts->mcq_id_fk=$mcqId; 
+                if($mcqUserReq->userAnswerOption == $currentMcqView->correct_Answer )
+                {
+                    $attempts->correct_ans=1;
                 }
                 else
                 {
-                    // All questions completed
-                    return view('User.Result.userResult');
+                    $attempts->correct_ans=0;
+                }
+                $savedAttemptsMcqAns=$attempts->save();
+                if($savedAttemptsMcqAns)
+                {
+                    DB::commit();
+                    // If next question exists
+                    if ($userMcqView) {
+                        $currentQuiz['currentMcq']++;
+                        $currentQuiz['currentMcqId'] = $userMcqView->mcq_id;
+                        Session::put('currentQuiz', $currentQuiz);
+                        // return view('User.userMcq.userSpecificMcqList',compact('userMcqView', 'currentQuiz'));
+                        return redirect('/user/mcq/question/' . $userMcqView->mcq_id);
+                    }
+                    else
+                    {
+                        // All questions completed
+                        return view('User.Result.userResult');
+                    }
                 }
             }
+            else // if check not use then do not use 
+            {
+                DB::rollback();
+                return back()->with('error','Answer attempts only once please restart the quiz.');
+            }
+            
         }
         catch(\Exception $e)
         {
